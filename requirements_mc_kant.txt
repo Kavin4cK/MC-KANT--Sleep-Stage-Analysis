@@ -1,0 +1,2175 @@
+# MC-KANT runtime dependencies.
+#
+# For an NVIDIA A100 server, install CUDA PyTorch first, then this file:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements_mc_kant.txt
+#
+# Or let the training launcher do it:
+#   python train_mc_kant.py --install-torch
+
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3
+tqdm>=4.65
+pandas>=2.0
+openpyxl>=3.1
+mne>=1.4
+matplotlib>=3.7
+
+
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-14-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+7 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+*** System restart required ***
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+Last login: Thu Jun 25 10:11:38 2026 from 172.16.65.23
+rvce@117csrdz420:~$ df
+Filesystem                        1K-blocks     Used Available Use% Mounted on
+tmpfs                               6347208     9744   6337464   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv 957150424 17676600 890779552   2% /
+tmpfs                              15868016        0  15868016   0% /dev/shm
+efivarfs                                384      102       278  27% /sys/firmwar                                                                                                             e/efi/efivars
+none                                   1024        0      1024   0% /run/credent                                                                                                             ials/systemd-journald.service
+tmpfs                              15868016     3816  15864200   1% /tmp
+none                                   1024        0      1024   0% /run/credent                                                                                                             ials/systemd-resolved.service
+/dev/sda2                           1992552   147304   1724008   8% /boot
+/dev/sda1                           1098628     6452   1092176   1% /boot/efi
+tmpfs                               3173600       56   3173544   1% /run/user/60                                                                                                             580
+tmpfs                               3173600       88   3173512   1% /run/user/10                                                                                                             00
+/dev/sdb                          960303848     2080 911447256   1% /run/media/r                                                                                                             vce/CSERV
+tmpfs                               3173600       56   3173544   1% /run/user/60                                                                                                             583
+rvce@117csrdz420:~$ ssh 172.16.18.2@csegpuserver
+ssh: Could not resolve hostname csegpuserver: Temporary failure in name resolution
+rvce@117csrdz420:~$ ssh csegpuserver@172.16.18.2
+csegpuserver@172.16.18.2's password:
+ **********************************************************
+* WARNING: GPU SERVER - DO NOT STOP THE SCREEN SESSIONS *
+**********************************************************
+
+Last login: Thu Jun 25 06:42:02 2026 from 100.113.102.15
+csegpuserver@rvcse:~$ df
+Filesystem       1K-blocks       Used   Available Use% Mounted on
+tmpfs             13162632      37548    13125084   1% /run
+/dev/sda2        920811300  778192864    95770132  90% /
+tmpfs             65813152      45700    65767452   1% /dev/shm
+tmpfs                 5120          4        5116   1% /run/lock
+efivarfs               512         45         463   9% /sys/firmware/efi/efivars
+/dev/sda1           523244       6232      517012   2% /boot/efi
+/dev/sdb1      19453053208 6545053196 11931392476  36% /media/rvcse22/CSERV
+tmpfs             13162628        116    13162512   1% /run/user/1000
+tmpfs             13162628         96    13162532   1% /run/user/128
+csegpuserver@rvcse:~$ ls
+abacus-develop   CourtLLM_OpenEnv            fdf.20260530T142231.895.log  Kushagra                paper                          queue_odd.log      siesta_install
+abacus.log       courtllm_outputs            finalize_model.py            layer                   phi                            r3d_ad_ldm         SMG_PRM_FS
+AL               CRASH                       GaitProject                  master_log.txt          plots                          regen_plots.py     snap
+AMP.py           crush_ablations.py          gemma                        medgemma                pointpillars                   repvit_trial_2.py  SVHN
+amp_work         cuda-keyring_1.1-1_all.deb  gpuRIR                       mednsq                  ppe                            run_gemma.py       time.json
+Autism_Bert      dataset_split_0.3.py        gw.out                       medsnq-minalmaam        presentation_package           rvce               train_grpo_a100.py
+backup_graphrca  debian-binary               INPUT_TMP.00000              MESSAGES                project_inventory.txt          scf.out            training_log.txt
+blender          D:elmain_elSVARA            input_tmp.in                 miniconda3              __pycache__                    Screen2Latex       unsloth_compiled_cache
+CLOCK            DONOTOPEN                   instcheck-rvcse-mum7sedw     my_process.pid          qat_work                       Screenshots        yambo_background.out
+coecg            download_save.log           instcheck-rvcse-ouz8zous     nps_labs_backup.tar.gz  QuantumSepsis                  SD
+control.tar.xz   fastCMAD_packages           Inverse-Modelling            npswork                 QuantumSepsis_Complete_Backup  siesta.alloc
+csegpuserver@rvcse:~$ sl
+slabtop      slattach     sleep        slirp4netns  slogin       slxdecode
+csegpuserver@rvcse:~$ cd /media/rvcse22/CSERV
+csegpuserver@rvcse:/media/rvcse22/CSERV$ ls
+ 17216183                                                       graph2                      new3608s                    sleepproj
+ 25022025                                                       graph-rca                   new360o                     SMG_PRM_FS
+ 290126                                                         greywolf                    new_8s_1                    spwm
+ activate_nvhpc_cuda13.sh                                       hashhop                     new_8s_2                   'sudo su.txt'
+ Alzeheimer                                                     histtab26.txt               new_maj                     SVARA
+ amazonML                                                       hologram                    new_maj_10                  tableau-server-2024-2-13_amd64.deb
+ apptainer_build                                                iddx                        new_maj_11                  Tarun
+ apptainer_cache                                                image2sketch                new_maj_9                   test.py
+ backup_dataset                                                'image2sketch'$'\n\n\n'      NiMn2O4222                  tl_backup
+ backup_dataset2                                                ImageCaptioning             NiMnO_CPU                   tmp
+ cgmrict                                                        Inference_Testing           NMO2O4_222                  TrafficFlowPrediction
+ ClinicalNotesICU                                               jupyter_workspace           NPS_LAB_EL                  train2017
+ coco                                                           kortex_sem5                 npswork                     train2017.zip
+ CSB                                                            Linux                       nvhpc_cuda13                train2017.zip.1
+ cse                                                            llm_models.tar.gz           ollama_models               tsn_r50_320p_1x1x8_150e_activitynet_video_flow_20200804-13313f52.pth
+ CT-ADE                                                         lost+found                  p53                         Untitled
+ CT-ADE_unzipped                                                maj11                       PAKML.zip                  'Untitled Folder'
+ cuda-keyring_1.0-1_all.deb                                     maj_nms_10s                 pip_cache                   Untitled.ipynb
+ cuda-repo-ubuntu2204-11-8-local_11.8.0-520.61.05-1_amd64.deb   maj_nms_8s                  pointpillars                v9-models
+ cuda-repo-ubuntu2204-12-1-local_12.1.0-530.30.02-1_amd64.deb   maj_nms_9s                  ppe_sur                     vdaproj
+ cuda-repo-ubuntu2404-12-8-local_12.8.0-570.86.10-1_amd64.deb   major8                      proj                        vehicle_9maj
+ customfolder                                                   Major_project_112_114_151   pslibrary                   vehicle_major
+ dap                                                            maj_trial                   python-packages             vehicle_major_1
+ dcn                                                            medlm                       q-e-qe-7.5                  vehicle_train_maj
+ DeepRadText                                                    meteor                      q-e-qe-7.5-cpu              vihadhar
+'Desktop files 211025'                                          mgnn-ipv                    QE+YAMBO                    vsw_dusp15-DOCK_HTVS_1.py
+ dnai                                                           moldy                       QuantumSepsis               Worklet25SI03RV_PRISM
+ dusp_phv                                                       mp                          QuantumSepsis_checkpoints   Worklet25SI03RV_PRISM.zip
+ envs                                                           msv                         README.md                   wsl_env
+ flows                                                          ne                          samsung_24IV48RV            WSL-Framework-main
+ fmaEL                                                          new                         SANIDP                      WSL_project
+ fogRemoval                                                     new_1                       sdg                         yambo-5.3.0
+ forgettingcurve                                                new10                       sipp                        yolo11n.pt
+ genai                                                          new11s                      Sleep_CK_26                 yolov9s.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV$ cd Sleep_CK_26
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ls
+processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd processed_data/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ ls
+nimhans_np  numpy_subjects
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ cd n
+nimhans_np/     numpy_subjects/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ ls
+nimhans_np  numpy_subjects
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ pwd
+/media/rvcse22/CSERV/Sleep_CK_26/processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd..
+cd..: command not found
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV$ cd ..
+csegpuserver@rvcse:/media/rvcse22$ cd ..
+csegpuserver@rvcse:/media$ cd ..
+csegpuserver@rvcse:/$ ls
+bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  var
+csegpuserver@rvcse:/$ cd /media/rvcse22/CSERV/Sleep_CK_26
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ls
+processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd processed_data/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd processed_data/numpy_subjects/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs            13G   37M   13G   1% /run
+/dev/sda2       879G  743G   92G  90% /
+tmpfs            63G   45M   63G   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+efivarfs        512K   45K  463K   9% /sys/firmware/efi/efivars
+/dev/sda1       511M  6.1M  505M   2% /boot/efi
+/dev/sdb1        19T  6.1T   12T  36% /media/rvcse22/CSERV
+tmpfs            13G  116K   13G   1% /run/user/1000
+tmpfs            13G   96K   13G   1% /run/user/128
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects$ nvidia-smi
+Thu Jun 25 11:04:27 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   40C    P0             37W /  250W |   10373MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 39%   33C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   31C    P0             33W /  250W |   10297MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    0   N/A  N/A         3948122      C   ...e22/CSERV/q-e-qe-7.5/bin/ph.x      10350MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    2   N/A  N/A         3948123      C   ...e22/CSERV/q-e-qe-7.5/bin/ph.x      10274MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ ;s
+-bash: syntax error near unexpected token `;'
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ ls
+nimhans_np  numpy_subjects
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ ls
+nimhans_np  numpy_subjects
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/processed_data$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ls
+MC_KANT  processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd MC_KANT
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ls
+mc_kant  requirements_mc_kant.txt  train_mc_kant.py  verify_mc_kant.py
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd mc_kant/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$ ls
+contrastive.py  dataset.py  feature_extractor.py  __init__.py  kan_head.py  model.py  __pycache__  train.py  unet_encoder.py
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd
+MC_KANT/        processed_data/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd m
+-bash: cd: m: No such file or directory
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd MC_KANT/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Thu Jun 25 11:17:35 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   40C    P0             37W /  250W |   10373MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 39%   33C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   31C    P0             33W /  250W |   10297MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    0   N/A  N/A         3948122      C   ...e22/CSERV/q-e-qe-7.5/bin/ph.x      10350MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    2   N/A  N/A         3948123      C   ...e22/CSERV/q-e-qe-7.5/bin/ph.x      10274MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smio
+Command 'nvidia-smio' not found, but there are 16 similar ones.
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Thu Jun 25 11:51:44 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   40C    P0             37W /  250W |   10373MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 40%   33C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   31C    P0             33W /  250W |   10297MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    0   N/A  N/A         3948122      C   ...e22/CSERV/q-e-qe-7.5/bin/ph.x      10350MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    2   N/A  N/A         3948123      C   ...e22/CSERV/q-e-qe-7.5/bin/ph.x      10274MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && CUDA_VISIBLE_DEVICES=2 python3 train_mc_kant.py --skip-install
+\Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 166, in main
+    from mc_kant.train import train_kfold
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/__init__.py", line 19, in <module>
+    from .model import MCKANT
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/model.py", line 38, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Collecting torch>=2.1
+  Downloading https://download-r2.pytorch.org/whl/cu121/torch-2.5.1%2Bcu121-cp310-cp310-linux_x86_64.whl (780.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 780.4/780.4 MB 8.9 MB/s eta 0:00:00
+Collecting torchvision>=0.16
+  Downloading https://download-r2.pytorch.org/whl/cu121/torchvision-0.20.1%2Bcu121-cp310-cp310-linux_x86_64.whl (7.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.3/7.3 MB 5.5 MB/s eta 0:00:00
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Collecting nvidia-cuda-nvrtc-cu12==12.1.105 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (23.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.7/23.7 MB 14.9 MB/s eta 0:00:00
+Collecting nvidia-cuda-runtime-cu12==12.1.105 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cuda_runtime_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (823 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 823.6/823.6 kB 243.3 MB/s eta 0:00:00
+Collecting nvidia-cuda-cupti-cu12==12.1.105 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cuda_cupti_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (14.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.1/14.1 MB 9.7 MB/s eta 0:00:00
+Collecting nvidia-cudnn-cu12==9.1.0.70 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cudnn_cu12-9.1.0.70-py3-none-manylinux2014_x86_64.whl (664.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 664.8/664.8 MB 8.6 MB/s eta 0:00:00
+Collecting nvidia-cublas-cu12==12.1.3.1 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cublas_cu12-12.1.3.1-py3-none-manylinux1_x86_64.whl (410.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 410.6/410.6 MB 8.5 MB/s eta 0:00:00
+Collecting nvidia-cufft-cu12==11.0.2.54 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cufft_cu12-11.0.2.54-py3-none-manylinux1_x86_64.whl (121.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 121.6/121.6 MB 8.5 MB/s eta 0:00:00
+Collecting nvidia-curand-cu12==10.3.2.106 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl (56.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.5/56.5 MB 9.2 MB/s eta 0:00:00
+Collecting nvidia-cusolver-cu12==11.4.5.107 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cusolver_cu12-11.4.5.107-py3-none-manylinux1_x86_64.whl (124.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 124.2/124.2 MB 9.0 MB/s eta 0:00:00
+Collecting nvidia-cusparse-cu12==12.1.0.106 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_cusparse_cu12-12.1.0.106-py3-none-manylinux1_x86_64.whl (196.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 196.0/196.0 MB 8.4 MB/s eta 0:00:00
+Collecting nvidia-nccl-cu12==2.21.5 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/nvidia_nccl_cu12-2.21.5-py3-none-manylinux2014_x86_64.whl (188.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 188.7/188.7 MB 8.2 MB/s eta 0:00:00
+Collecting nvidia-nvtx-cu12==12.1.105 (from torch>=2.1)
+  Downloading https://download.pytorch.org/whl/cu121/nvidia_nvtx_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (99 kB)
+Collecting triton==3.1.0 (from torch>=2.1)
+  Downloading https://download-r2.pytorch.org/whl/triton-3.1.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (209.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 209.5/209.5 MB 8.8 MB/s eta 0:00:00
+Collecting sympy==1.13.1 (from torch>=2.1)
+  Downloading sympy-1.13.1-py3-none-any.whl.metadata (12 kB)
+Collecting nvidia-nvjitlink-cu12 (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1)
+  Downloading https://download.pytorch.org/whl/nvidia_nvjitlink_cu12-12.9.86-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl.metadata (1.7 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /usr/lib/python3/dist-packages (from torchvision>=0.16) (1.21.5)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+Downloading sympy-1.13.1-py3-none-any.whl (6.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 17.4 MB/s eta 0:00:00
+Downloading https://download.pytorch.org/whl/nvidia_nvjitlink_cu12-12.9.86-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (39.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 39.7/39.7 MB 10.6 MB/s eta 0:00:00
+Installing collected packages: triton, sympy, nvidia-nvtx-cu12, nvidia-nvjitlink-cu12, nvidia-nccl-cu12, nvidia-curand-cu12, nvidia-cufft-cu12, nvidia-cuda-runtime-cu12, nvidia-cuda-nvrtc-cu12, nvidia-cuda-cupti-cu12, nvidia-cublas-cu12, nvidia-cusparse-cu12, nvidia-cudnn-cu12, nvidia-cusolver-cu12, torch, torchvision
+  WARNING: The scripts proton and proton-viewer are installed in '/home/csegpuserver/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script isympy is installed in '/home/csegpuserver/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The scripts convert-caffe2-to-onnx, convert-onnx-to-caffe2, torchfrtrace and torchrun are installed in '/home/csegpuserver/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+nnunetv2 2.7.0 requires scipy, which is not installed.
+xgboost 3.2.0 requires scipy, which is not installed.
+nnunetv2 2.7.0 requires numpy>=1.24, but you have numpy 1.21.5 which is incompatible.
+Successfully installed nvidia-cublas-cu12-12.1.3.1 nvidia-cuda-cupti-cu12-12.1.105 nvidia-cuda-nvrtc-cu12-12.1.105 nvidia-cuda-runtime-cu12-12.1.105 nvidia-cudnn-cu12-9.1.0.70 nvidia-cufft-cu12-11.0.2.54 nvidia-curand-cu12-10.3.2.106 nvidia-cusolver-cu12-11.4.5.107 nvidia-cusparse-cu12-12.1.0.106 nvidia-nccl-cu12-2.21.5 nvidia-nvjitlink-cu12-12.9.86 nvidia-nvtx-cu12-12.1.105 sympy-1.13.1 torch-2.5.1+cu121 torchvision-0.20.1+cu121 triton-3.1.0
+[MC-KANT] Installing: scipy openpyxl mne
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://pypi.org/simple, https://pypi.ngc.nvidia.com
+Collecting scipy
+  Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+Collecting openpyxl
+  Downloading openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+Collecting mne
+  Downloading mne-1.12.1-py3-none-any.whl.metadata (16 kB)
+Collecting numpy<2.5,>=1.23.5 (from scipy)
+  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+Collecting et-xmlfile (from openpyxl)
+  Downloading et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+Requirement already satisfied: decorator>=5.1 in /usr/local/lib/python3.10/dist-packages (from mne) (5.1.1)
+Requirement already satisfied: jinja2>=3.1 in /usr/local/lib/python3.10/dist-packages (from mne) (3.1.4)
+Requirement already satisfied: lazy-loader>=0.3 in /home/csegpuserver/.local/lib/python3.10/site-packages (from mne) (0.5)
+Requirement already satisfied: matplotlib>=3.8 in /home/csegpuserver/.local/lib/python3.10/site-packages (from mne) (3.10.9)
+Requirement already satisfied: packaging in /usr/local/lib/python3.10/dist-packages (from mne) (24.2)
+Collecting pooch>=1.5 (from mne)
+  Downloading pooch-1.9.0-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: tqdm>=4.66 in /home/csegpuserver/.local/lib/python3.10/site-packages (from mne) (4.67.3)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2>=3.1->mne) (3.0.3)
+Requirement already satisfied: contourpy>=1.0.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from matplotlib>=3.8->mne) (1.3.2)
+Requirement already satisfied: cycler>=0.10 in /home/csegpuserver/.local/lib/python3.10/site-packages (from matplotlib>=3.8->mne) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from matplotlib>=3.8->mne) (4.62.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from matplotlib>=3.8->mne) (1.5.0)
+Requirement already satisfied: pillow>=8 in /home/csegpuserver/.local/lib/python3.10/site-packages (from matplotlib>=3.8->mne) (12.2.0)
+Requirement already satisfied: pyparsing>=3 in /home/csegpuserver/.local/lib/python3.10/site-packages (from matplotlib>=3.8->mne) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.10/dist-packages (from matplotlib>=3.8->mne) (2.9.0.post0)
+Requirement already satisfied: platformdirs>=2.5.0 in /usr/local/lib/python3.10/dist-packages (from pooch>=1.5->mne) (4.3.6)
+Requirement already satisfied: requests>=2.19.0 in /usr/local/lib/python3.10/dist-packages (from pooch>=1.5->mne) (2.32.3)
+Requirement already satisfied: six>=1.5 in /usr/lib/python3/dist-packages (from python-dateutil>=2.7->matplotlib>=3.8->mne) (1.16.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests>=2.19.0->pooch>=1.5->mne) (3.4.0)
+Requirement already satisfied: idna<4,>=2.5 in /usr/lib/python3/dist-packages (from requests>=2.19.0->pooch>=1.5->mne) (3.3)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/lib/python3/dist-packages (from requests>=2.19.0->pooch>=1.5->mne) (1.26.5)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/lib/python3/dist-packages (from requests>=2.19.0->pooch>=1.5->mne) (2020.6.20)
+Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 11.4 MB/s eta 0:00:00
+Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+Downloading mne-1.12.1-py3-none-any.whl (7.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.5/7.5 MB 9.8 MB/s eta 0:00:00
+Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 5.9 MB/s eta 0:00:00
+Downloading pooch-1.9.0-py3-none-any.whl (67 kB)
+Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+Installing collected packages: numpy, et-xmlfile, scipy, pooch, openpyxl, mne
+  WARNING: The scripts f2py and numpy-config are installed in '/home/csegpuserver/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The script mne is installed in '/home/csegpuserver/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+holoviews 1.22.1 requires colorcet, which is not installed.
+holoviews 1.22.1 requires narwhals>=2, which is not installed.
+holoviews 1.22.1 requires param<3.0,>=2.0, which is not installed.
+hvplot 0.12.2 requires colorcet>=2, which is not installed.
+hvplot 0.12.2 requires param<3.0,>=1.12.0, which is not installed.
+onnx 1.21.0 requires protobuf>=4.25.1, which is not installed.
+panel 1.7.5 requires markdown-it-py, which is not installed.
+panel 1.7.5 requires mdit-py-plugins, which is not installed.
+panel 1.7.5 requires param<3.0,>=2.1.0, which is not installed.
+tensorboard 2.20.0 requires grpcio>=1.48.2, which is not installed.
+tensorboard 2.20.0 requires protobuf!=4.24.0,>=3.19.6, which is not installed.
+Successfully installed et-xmlfile-2.0.0 mne-1.12.1 numpy-2.2.6 openpyxl-3.1.5 pooch-1.9.0 scipy-1.15.3
+
+[notice] A new release of pip is available: 24.3.1 -> 26.1.2
+[notice] To update, run: python3 -m pip install --upgrade pip
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+
+============================================================
+  Fold 1 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+^CTraceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 483, in train_kfold
+    mean, std = compute_norm_stats(train_files)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/dataset.py", line 119, in compute_norm_stats
+    c = d[NPZ_X_KEY].shape[-1]
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py", line 254, in __getitem__
+    return format.read_array(bytes,
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/numpy/lib/format.py", line 852, in read_array
+    array[i:i+read_count] = numpy.frombuffer(data, dtype=dtype,
+KeyboardInterrupt
+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$
+
+
+
+-BREAKKKKKKKKK-
+
+
+
+
+
+
+
+
+
+
+login as: rvce
+rvce@172.16.18.6's password:
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-14-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+9 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+*** System restart required ***
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+Last login: Wed Jul  1 12:48:10 2026 from 172.16.65.242
+rvce@117csrdz420:~$ ssh csegpuserver@172.16.18.2
+csegpuserver@172.16.18.2's password:
+ **********************************************************
+* WARNING: GPU SERVER - DO NOT STOP THE SCREEN SESSIONS *
+**********************************************************
+
+Last login: Thu Jul  2 07:00:57 2026 from 100.113.102.15
+csegpuserver@rvcse:~$ nvidia-smi
+Thu Jul  2 10:58:54 2026
++-------------------------------------------------------------------------------                                                                                                             ----------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version:                                                                                                              13.0     |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Un                                                                                                             corr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  C                                                                                                             ompute M. |
+|                                         |                        |                                                                                                                            MIG M. |
+|=========================================+========================+============                                                                                                             ==========|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                                                                                                                                 0 |
+| N/A   42C    P0             38W /  250W |   10339MiB /  40960MiB |      0%                                                                                                                   Default |
+|                                         |                        |                                                                                                                          Disabled |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                                                                                                                               N/A |
+| 39%   33C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%                                                                                                                   Default |
+|                                         |                        |                                                                                                                               N/A |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                                                                                                                                 0 |
+| N/A   31C    P0             33W /  250W |    6497MiB /  40960MiB |      0%                                                                                                                   Default |
+|                                         |                        |                                                                                                                          Disabled |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+
++-------------------------------------------------------------------------------                                                                                                             ----------+
+| Processes:                                                                                                                                                                                           |
+|  GPU   GI   CI              PID   Type   Process name                        G                                                                                                             PU Memory |
+|        ID   ID                                                               U                                                                                                             sage      |
+|===============================================================================                                                                                                             ==========|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                                                                                                                                     4MiB |
+|    0   N/A  N/A         2471335      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x                                                                                                                   10312MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                                                                                                                                    88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                                                                                                                                   5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                                                                                                                                     4MiB |
+|    2   N/A  N/A         2471336      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x                                                                                                                    6470MiB |
++-------------------------------------------------------------------------------                                                                                                             ----------+
+csegpuserver@rvcse:~$ ls
+abacus-develop    courtllm_outputs             GaitProject               medgemma                ppe                            rvce                   stark_0_new_gpu_test.out
+abacus.log        CRASH                        gemma                     mednsq                  presentation_package           scf.out                stark_0.out
+AL                crush_ablations.py           gpuRIR                    medsnq-minalmaam        project_inventory.txt          scf_stark_242_cpu.out  stark_x_pos.out
+AMP.py            cuda-keyring_1.1-1_all.deb   gw.out                    MESSAGES                __pycache__                    scf_stark_242.out      stark_y_pos.out
+amp_work          dataset_split_0.3.py         INPUT_TMP.00000           miniconda3              qat_work                       scf_stark_262.out      SVHN
+Autism_Bert       debian-binary                input_tmp.in              my_process.pid          QuantumSepsis                  Screen2Latex           time.json
+backup_graphrca   D:elmain_elSVARA             instcheck-rvcse-mum7sedw  nps_labs_backup.tar.gz  QuantumSepsis_Complete_Backup  Screenshots            train_grpo_a100.py
+blender           DONOTOPEN                    instcheck-rvcse-ouz8zous  npswork                 queue_odd.log                  SD                     training_log.txt
+CLOCK             download_save.log            Inverse-Modelling         paper                   r3d_ad_ldm                     siesta.alloc           unsloth_compiled_cache
+coecg             fastCMAD_packages            Kushagra                  phi                     regen_plots.py                 siesta_install         yambo_background.out
+control.tar.xz    fdf.20260530T142231.895.log  layer                     plots                   repvit_trial_2.py              SMG_PRM_FS
+CourtLLM_OpenEnv  finalize_model.py            master_log.txt            pointpillars            run_gemma.py                   snap
+csegpuserver@rvcse:~$ cd ..
+csegpuserver@rvcse:/home$ ls
+condaenv  csegpuserver  major
+csegpuserver@rvcse:/home$ cd ..
+csegpuserver@rvcse:/$ ls
+bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  swapfile  sys  tmp  usr  var
+csegpuserver@rvcse:/$ cd media/rvcse22/CSERV/S
+SANIDP/      Sleep_CK_26/ SMG_PRM_FS/  SVARA/
+csegpuserver@rvcse:/$ cd media/rvcse22/CSERV/Sleep_CK_26/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ls
+MC_KANT  processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd MC_KANT/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ls
+mc_kant  mc_kant_checkpoints_a100  requirements_mc_kant.txt  train_mc_kant.py  verify_mc_kant.py
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd mc_kant
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$ ^M
+: command not found
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+
+============================================================
+  Fold 1 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=75,671  seq_train=74,132  val=7,808  test=9,582
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase A] Contrastive pre-training for 20 epochs
+    Ep 001/20 | Total=4.3924 | Focal=0.5222 | SupCon=7.7404 | LR=9.33e-04 | time=941s
+    Ep 002/20 | Total=3.5136 | Focal=0.3740 | SupCon=6.2791 | LR=7.50e-04 | time=83s
+    Ep 003/20 | Total=3.4626 | Focal=0.3448 | SupCon=6.2356 | LR=5.01e-04 | time=75s
+    Ep 004/20 | Total=3.4464 | Focal=0.3288 | SupCon=6.2352 | LR=2.51e-04 | time=65s
+    Ep 005/20 | Total=3.4326 | Focal=0.3150 | SupCon=6.2352 | LR=6.79e-05 | time=65s
+    Ep 006/20 | Total=3.4233 | Focal=0.3057 | SupCon=6.2351 | LR=1.00e-03 | time=65s
+    Ep 007/20 | Total=3.4480 | Focal=0.3305 | SupCon=6.2351 | LR=9.83e-04 | time=64s
+    Ep 008/20 | Total=3.4333 | Focal=0.3158 | SupCon=6.2350 | LR=9.33e-04 | time=64s
+    Ep 009/20 | Total=3.4255 | Focal=0.3081 | SupCon=6.2349 | LR=8.54e-04 | time=64s
+    Ep 010/20 | Total=3.4152 | Focal=0.2978 | SupCon=6.2349 | LR=7.50e-04 | time=64s
+    Ep 011/20 | Total=3.4074 | Focal=0.2899 | SupCon=6.2348 | LR=6.30e-04 | time=64s
+    Ep 012/20 | Total=3.3973 | Focal=0.2799 | SupCon=6.2348 | LR=5.01e-04 | time=66s
+    Ep 013/20 | Total=3.3879 | Focal=0.2705 | SupCon=6.2348 | LR=3.71e-04 | time=77s
+    Ep 014/20 | Total=3.3788 | Focal=0.2614 | SupCon=6.2348 | LR=2.51e-04 | time=84s
+    Ep 015/20 | Total=3.3707 | Focal=0.2533 | SupCon=6.2348 | LR=1.47e-04 | time=81s
+    Ep 016/20 | Total=3.3619 | Focal=0.2445 | SupCon=6.2348 | LR=6.79e-05 | time=64s
+    Ep 017/20 | Total=3.3579 | Focal=0.2405 | SupCon=6.2348 | LR=1.80e-05 | time=64s
+    Ep 018/20 | Total=3.3533 | Focal=0.2359 | SupCon=6.2348 | LR=1.00e-03 | time=64s
+    Ep 019/20 | Total=3.3895 | Focal=0.2721 | SupCon=6.2348 | LR=9.96e-04 | time=64s
+    Ep 020/20 | Total=3.3811 | Focal=0.2636 | SupCon=6.2349 | LR=9.83e-04 | time=64s
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+    Ep 001/60 | Tr loss=0.2116 acc=0.7065 f1=0.6842 | Va loss=0.3887 acc=0.6019 f1=0.5629 | LR=4.97e-04 | 1085s
+    Ep 002/60 | Tr loss=0.1736 acc=0.7380 f1=0.7185 | Va loss=0.2927 acc=0.5853 f1=0.5754 | LR=4.88e-04 | 516s
+    Ep 003/60 | Tr loss=0.1487 acc=0.7614 f1=0.7422 | Va loss=0.4215 acc=0.5338 f1=0.5291 | LR=4.73e-04 | 431s
+    Ep 004/60 | Tr loss=0.1284 acc=0.7825 f1=0.7640 | Va loss=0.3745 acc=0.6085 f1=0.5916 | LR=4.52e-04 | 515s
+    Ep 005/60 | Tr loss=0.1158 acc=0.8019 f1=0.7836 | Va loss=0.3490 acc=0.6224 f1=0.6003 | LR=4.27e-04 | 432s
+    Ep 006/60 | Tr loss=0.1028 acc=0.8194 f1=0.8011 | Va loss=0.4931 acc=0.6148 f1=0.5739 | LR=3.97e-04 | 516s
+    Ep 007/60 | Tr loss=0.0900 acc=0.8362 f1=0.8190 | Va loss=0.5807 acc=0.6288 f1=0.5862 | LR=3.64e-04 | 432s
+    Ep 008/60 | Tr loss=0.0802 acc=0.8546 f1=0.8371 | Va loss=0.3699 acc=0.6688 f1=0.6343 | LR=3.27e-04 | 518s
+    Ep 009/60 | Tr loss=0.0700 acc=0.8690 f1=0.8525 | Va loss=0.5059 acc=0.6159 f1=0.5807 | LR=2.89e-04 | 432s
+    Ep 010/60 | Tr loss=0.0611 acc=0.8823 f1=0.8668 | Va loss=0.4879 acc=0.6303 f1=0.5972 | LR=2.50e-04 | 518s
+    Ep 011/60 | Tr loss=0.0533 acc=0.8936 f1=0.8788 | Va loss=0.5309 acc=0.6530 f1=0.6085 | LR=2.11e-04 | 438s
+    Ep 012/60 | Tr loss=0.0478 acc=0.9037 f1=0.8900 | Va loss=0.5065 acc=0.6254 f1=0.5947 | LR=1.73e-04 | 510s
+    Ep 013/60 | Tr loss=0.0412 acc=0.9134 f1=0.9005 | Va loss=0.5744 acc=0.6580 f1=0.6137 | LR=1.37e-04 | 458s
+    Ep 014/60 | Tr loss=0.0362 acc=0.9227 f1=0.9107 | Va loss=0.6117 acc=0.6498 f1=0.6100 | LR=1.03e-04 | 489s
+    Ep 015/60 | Tr loss=0.0323 acc=0.9296 f1=0.9183 | Va loss=0.6212 acc=0.6516 f1=0.6087 | LR=7.37e-05 | 479s
+    Ep 016/60 | Tr loss=0.0284 acc=0.9354 f1=0.9248 | Va loss=0.6317 acc=0.6511 f1=0.6077 | LR=4.82e-05 | 468s
+    Ep 017/60 | Tr loss=0.0265 acc=0.9407 f1=0.9309 | Va loss=0.6354 acc=0.6265 f1=0.5862 | LR=2.77e-05 | 500s
+    Ep 018/60 | Tr loss=0.0235 acc=0.9442 f1=0.9351 | Va loss=0.6757 acc=0.6575 f1=0.6087 | LR=1.27e-05 | 446s
+    Ep 019/60 | Tr loss=0.0222 acc=0.9473 f1=0.9384 | Va loss=0.6781 acc=0.6510 f1=0.6046 | LR=3.57e-06 | 517s
+    Ep 020/60 | Tr loss=0.0222 acc=0.9478 f1=0.9390 | Va loss=0.6720 acc=0.6647 f1=0.6143 | LR=5.00e-04 | 431s
+    Early stopping at epoch 20
+
+  [Fold 1] Test Results
+    Loss: 0.3850  Acc: 0.6343  Macro-F1: 0.5881
+    Classification Report (0=W, 1=N1, 2=N2, 3=N3, 4=REM):
+              precision    recall  f1-score   support
+
+           W     0.8458    0.8322    0.8390      2748
+          N1     0.2574    0.3327    0.2902      1073
+          N2     0.9199    0.4825    0.6330      4025
+          N3     0.5070    0.9282    0.6558       822
+         REM     0.3888    0.7976    0.5228       914
+
+    accuracy                         0.6343      9582
+   macro avg     0.5838    0.6747    0.5881      9582
+weighted avg     0.7384    0.6343    0.6451      9582
+
+    Confusion Matrix:
+[[2287  355   25    3   78]
+ [ 270  357   36    5  405]
+ [ 124  566 1942  731  662]
+ [   4    0   54  763    1]
+ [  19  109   54    3  729]]
+    Checkpoint saved: ./mc_kant_checkpoints_a100/mc_kant_fold01_best.pt
+    Resume marker advanced to fold 2.
+
+============================================================
+  Fold 2 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=76,269  seq_train=74,730  val=7,814  test=8,978
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase A] Contrastive pre-training for 20 epochs
+    Ep 001/20 | Total=4.3835 | Focal=0.5117 | SupCon=7.7436 | LR=9.33e-04 | time=95s
+    Ep 002/20 | Total=3.5226 | Focal=0.3701 | SupCon=6.3050 | LR=7.50e-04 | time=64s
+    Ep 003/20 | Total=3.4570 | Focal=0.3385 | SupCon=6.2371 | LR=5.01e-04 | time=65s
+    Ep 004/20 | Total=3.4412 | Focal=0.3228 | SupCon=6.2368 | LR=2.51e-04 | time=65s
+    Ep 005/20 | Total=3.4269 | Focal=0.3085 | SupCon=6.2367 | LR=6.79e-05 | time=67s
+    Ep 006/20 | Total=3.4186 | Focal=0.3003 | SupCon=6.2366 | LR=1.00e-03 | time=65s
+    Ep 007/20 | Total=3.4392 | Focal=0.3209 | SupCon=6.2366 | LR=9.83e-04 | time=64s
+    Ep 008/20 | Total=3.4277 | Focal=0.3095 | SupCon=6.2365 | LR=9.33e-04 | time=65s
+    Ep 009/20 | Total=3.4188 | Focal=0.3005 | SupCon=6.2364 | LR=8.54e-04 | time=65s
+    Ep 010/20 | Total=3.4072 | Focal=0.2890 | SupCon=6.2364 | LR=7.50e-04 | time=65s
+    Ep 011/20 | Total=3.3981 | Focal=0.2799 | SupCon=6.2363 | LR=6.30e-04 | time=65s
+    Ep 012/20 | Total=3.3904 | Focal=0.2722 | SupCon=6.2363 | LR=5.01e-04 | time=65s
+    Ep 013/20 | Total=3.3808 | Focal=0.2627 | SupCon=6.2363 | LR=3.71e-04 | time=65s
+    Ep 014/20 | Total=3.3720 | Focal=0.2539 | SupCon=6.2363 | LR=2.51e-04 | time=66s
+    Ep 015/20 | Total=3.3649 | Focal=0.2467 | SupCon=6.2363 | LR=1.47e-04 | time=65s
+    Ep 016/20 | Total=3.3566 | Focal=0.2385 | SupCon=6.2364 | LR=6.79e-05 | time=65s
+    Ep 017/20 | Total=3.3512 | Focal=0.2330 | SupCon=6.2364 | LR=1.80e-05 | time=65s
+    Ep 018/20 | Total=3.3482 | Focal=0.2300 | SupCon=6.2364 | LR=1.00e-03 | time=65s
+    Ep 019/20 | Total=3.3836 | Focal=0.2654 | SupCon=6.2364 | LR=9.96e-04 | time=66s
+    Ep 020/20 | Total=3.3751 | Focal=0.2569 | SupCon=6.2364 | LR=9.83e-04 | time=64s
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+    Ep 001/60 | Tr loss=0.2084 acc=0.7136 f1=0.6903 | Va loss=0.2969 acc=0.6669 f1=0.6115 | LR=4.97e-04 | 1293s
+    Ep 002/60 | Tr loss=0.1674 acc=0.7469 f1=0.7272 | Va loss=0.3783 acc=0.6139 f1=0.5588 | LR=4.88e-04 | 435s
+    Ep 003/60 | Tr loss=0.1419 acc=0.7748 f1=0.7560 | Va loss=0.3753 acc=0.6092 f1=0.5667 | LR=4.73e-04 | 436s
+    Ep 004/60 | Tr loss=0.1266 acc=0.7903 f1=0.7726 | Va loss=0.3966 acc=0.6089 f1=0.5708 | LR=4.52e-04 | 436s
+    Ep 005/60 | Tr loss=0.1109 acc=0.8101 f1=0.7918 | Va loss=0.4666 acc=0.5988 f1=0.5612 | LR=4.27e-04 | 436s
+    Ep 006/60 | Tr loss=0.0979 acc=0.8264 f1=0.8091 | Va loss=0.4614 acc=0.6184 f1=0.5446 | LR=3.97e-04 | 436s
+    Ep 007/60 | Tr loss=0.0866 acc=0.8463 f1=0.8296 | Va loss=0.3963 acc=0.6482 f1=0.5839 | LR=3.64e-04 | 436s
+    Ep 008/60 | Tr loss=0.0753 acc=0.8612 f1=0.8453 | Va loss=0.4039 acc=0.6857 f1=0.6210 | LR=3.27e-04 | 435s
+    Ep 009/60 | Tr loss=0.0664 acc=0.8738 f1=0.8585 | Va loss=0.4621 acc=0.6616 f1=0.6027 | LR=2.89e-04 | 435s
+    Ep 010/60 | Tr loss=0.0593 acc=0.8845 f1=0.8701 | Va loss=0.5263 acc=0.6312 f1=0.5713 | LR=2.50e-04 | 435s
+
+
+---BREAK-- 2nd JULY 2026 - 20:35
+
+login as: rvce
+rvce@172.16.18.6's password:
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-14-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+9 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+*** System restart required ***
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+Last login: Thu Jul  2 10:57:22 2026 from 172.17.2.227
+rvce@117csrdz420:~$ ssh csegpuserver@172.16.18.2
+csegpuserver@172.16.18.2's password:
+ **********************************************************
+* WARNING: GPU SERVER - DO NOT STOP THE SCREEN SESSIONS *
+**********************************************************
+
+Last login: Thu Jul  2 17:16:58 2026 from 172.16.0.2
+csegpuserver@rvcse:~$ cd ..
+csegpuserver@rvcse:/home$ cd ..
+csegpuserver@rvcse:/$ cd ..
+csegpuserver@rvcse:/$ cd media/
+csegpuserver@rvcse:/media$ ls
+csegpuserver  rvcse22
+csegpuserver@rvcse:/media$ cd rvcse22/CSERV/
+csegpuserver@rvcse:/media/rvcse22/CSERV$ ls
+ 17216183
+ 25022025
+ 290126
+ activate_nvhpc_cuda13.sh
+ Al_fermi
+ Alzeheimer
+ amazonML
+ apptainer_build
+ apptainer_cache
+ backup_dataset
+ backup_dataset2
+ cgmrict
+ ClinicalNotesICU
+ coco
+ CSB
+ cse
+ CT-ADE
+ CT-ADE_unzipped
+ cuda-keyring_1.0-1_all.deb
+ cuda-repo-ubuntu2204-11-8-local_11.8.0-520.61.05-1_amd64.deb
+ cuda-repo-ubuntu2204-12-1-local_12.1.0-530.30.02-1_amd64.deb
+ cuda-repo-ubuntu2404-12-8-local_12.8.0-570.86.10-1_amd64.deb
+ customfolder
+ dap
+ dcn
+ DeepRadText
+'Desktop files 211025'
+ dnai
+ dusp_phv
+ envs
+ flows
+ fmaEL
+ fogRemoval
+ forgettingcurve
+ genai
+ graph2
+ graph-rca
+ greywolf
+ hashhop
+ histtab26.txt
+ hologram
+ iddx
+ image2sketch
+'image2sketch'$'\n\n\n'
+ ImageCaptioning
+ Inference_Testing
+ jupyter_workspace
+ kortex_sem5
+ Linux
+ llm_models.tar.gz
+ lost+found
+ maj11
+ maj_nms_10s
+ maj_nms_8s
+ maj_nms_9s
+ major8
+ Major_project_112_114_151
+ maj_trial
+ medlm
+ meteor
+ mgnn-ipv
+ moldy
+ mp
+ msv
+ ne
+ new
+ new_1
+ new10
+ new11s
+ new3608s
+ new360o
+ new_8s_1
+ new_8s_2
+ new_maj
+ new_maj_10
+ new_maj_11
+ new_maj_9
+ NiMn2O4222
+ NiMnO_CPU
+ NMO2O4_222
+ NPS_LAB_EL
+ npswork
+ nvhpc_cuda13
+ ollama_models
+ p53
+ PAKML.zip
+ pip_cache
+ pointpillars
+ ppe_sur
+ proj
+ pslibrary
+ python-packages
+ q-e-qe-7.5
+ q-e-qe-7.5-cpu
+ q-e-qe-7.5-gpu-compile
+ q-e-qe-7.5-gpu-opt
+ QE+YAMBO
+ QuantumSepsis
+ QuantumSepsis_checkpoints
+ README.md
+ samsung_24IV48RV
+ SANIDP
+ sdg
+ sipp
+ Sleep_CK_26
+ sleepproj
+ SMG_PRM_FS
+ spwm
+'sudo su.txt'
+ SVARA
+ tableau-server-2024-2-13_amd64.deb
+ Tarun
+ test.py
+ tl_backup
+ tmp
+ TrafficFlowPrediction
+ train2017
+ train2017.zip
+ train2017.zip.1
+ tsn_r50_320p_1x1x8_150e_activitynet_video_flow_20200804-13313f52.pth
+ Untitled
+'Untitled Folder'
+ Untitled.ipynb
+ v9-models
+ vdaproj
+ vdaquant
+ vehicle_9maj
+ vehicle_major
+ vehicle_major_1
+ vehicle_train_maj
+ vihadhar
+ vsw_dusp15-DOCK_HTVS_1.py
+ Worklet25SI03RV_PRISM
+ Worklet25SI03RV_PRISM.zip
+ wsl_env
+ WSL-Framework-main
+ WSL_project
+ yambo-5.3.0
+ yolo11n.pt
+ yolov9s.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV$ cd Sleep_CK_26/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ps -ef | grep train_mc_kant
+csegpus+ 2601729 2601489  0 17:30 pts/46   00:00:00 grep train_mc_kant
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd /media/rvcse22/CSERV/Sle                                                                                                             ep_CK_26/MC_KANT
+ls -lh mc_kant_checkpoints_a100
+total 123M
+-rw-rw-r-- 1 csegpuserver csegpuserver 25M Jul  2 14:32 mc_kant_fold01_best.pt
+-rw-rw-r-- 1 csegpuserver csegpuserver 99M Jul  2 16:44 mc_kant_resume.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ls -lh mc_kant_chec                                                                                                             kpoints_a100
+total 123M
+-rw-rw-r-- 1 csegpuserver csegpuserver 25M Jul  2 14:32 mc_kant_fold01_best.pt
+-rw-rw-r-- 1 csegpuserver csegpuserver 99M Jul  2 16:44 mc_kant_resume.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/C                                                                                                             SERV/Sleep_CK_26/MC_KANT
+CUDA_VISIBLE_DEVICES=2 python3 train_mc_kant.py --skip-install
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA T400 (1.6 GB, capability 7.5)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 442, in train_kfold
+    _restore_rng_state(resume_state.get("rng_state"))
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 259, in _restore_rng_state
+    torch.cuda.set_rng_state_all(state["cuda"])
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/cuda/random.py", line 87, in set_rng_state_all
+    set_rng_state(state, i)
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/cuda/random.py", line 77, in set_rng_state
+    _lazy_call(cb)
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/cuda/__init__.py", line 249, in _lazy_call
+    callable()
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/cuda/random.py", line 74, in cb
+    default_generator = torch.cuda.default_generators[idx]
+IndexError: tuple index out of range
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+
+============================================================
+  Fold 2 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=76,269  seq_train=74,730  val=7,814  test=8,978
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 14/60
+    Ep 014/60 | Tr loss=0.0347 acc=0.9229 f1=0.9118 | Va loss=0.6017 acc=0.6455 f1=0.5786 | LR=1.03e-04 | 548s
+    Ep 015/60 | Tr loss=0.0313 acc=0.9299 f1=0.9197 | Va loss=0.6314 acc=0.6555 f1=0.5850 | LR=7.37e-05 | 493s
+    Ep 016/60 | Tr loss=0.0273 acc=0.9366 f1=0.9270 | Va loss=0.6460 acc=0.6653 f1=0.5909 | LR=4.82e-05 | 449s
+    Ep 017/60 | Tr loss=0.0251 acc=0.9420 f1=0.9329 | Va loss=0.6538 acc=0.6639 f1=0.5927 | LR=2.77e-05 | 481s
+    Ep 018/60 | Tr loss=0.0222 acc=0.9456 f1=0.9373 | Va loss=0.6858 acc=0.6755 f1=0.6002 | LR=1.27e-05 | 503s
+    Ep 019/60 | Tr loss=0.0220 acc=0.9477 f1=0.9396 | Va loss=0.6958 acc=0.6679 f1=0.5903 | LR=3.57e-06 | 437s
+    Ep 020/60 | Tr loss=0.0211 acc=0.9485 f1=0.9406 | Va loss=0.7046 acc=0.6767 f1=0.5988 | LR=5.00e-04 | 508s
+    Early stopping at epoch 20
+
+  [Fold 2] Test Results
+    Loss: 0.4187  Acc: 0.6735  Macro-F1: 0.6199
+    Classification Report (0=W, 1=N1, 2=N2, 3=N3, 4=REM):
+              precision    recall  f1-score   support
+
+           W     0.8094    0.8250    0.8171      2388
+          N1     0.2600    0.4223    0.3218       663
+          N2     0.8264    0.5875    0.6867      3978
+          N3     0.5770    0.7795    0.6631       957
+         REM     0.5305    0.7198    0.6108       992
+
+    accuracy                         0.6735      8978
+   macro avg     0.6006    0.6668    0.6199      8978
+weighted avg     0.7207    0.6735    0.6836      8978
+
+    Confusion Matrix:
+[[1970  268   39   21   90]
+ [ 148  280  118   27   90]
+ [ 279  414 2337  499  449]
+ [   8    2  198  746    3]
+ [  29  113  136    0  714]]
+    Checkpoint saved: ./mc_kant_checkpoints_a100/mc_kant_fold02_best.pt
+    Resume marker advanced to fold 3.
+
+============================================================
+  Fold 3 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=75,825  seq_train=74,286  val=8,112  test=9,124
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase A] Contrastive pre-training for 20 epochs
+    Ep 001/20 | Total=4.3525 | Focal=0.5205 | SupCon=7.6641 | LR=9.33e-04 | time=188s
+    Ep 002/20 | Total=3.4881 | Focal=0.3712 | SupCon=6.2339 | LR=7.50e-04 | time=69s
+    Ep 003/20 | Total=3.4448 | Focal=0.3287 | SupCon=6.2322 | LR=5.01e-04 | time=65s
+    Ep 004/20 | Total=3.4244 | Focal=0.3087 | SupCon=6.2316 | LR=2.51e-04 | time=65s
+    Ep 005/20 | Total=3.4106 | Focal=0.2949 | SupCon=6.2315 | LR=6.79e-05 | time=65s
+    Ep 006/20 | Total=3.4013 | Focal=0.2856 | SupCon=6.2314 | LR=1.00e-03 | time=65s
+    Ep 007/20 | Total=3.4237 | Focal=0.3081 | SupCon=6.2314 | LR=9.83e-04 | time=65s
+    Ep 008/20 | Total=3.4128 | Focal=0.2972 | SupCon=6.2312 | LR=9.33e-04 | time=67s
+    Ep 009/20 | Total=3.4032 | Focal=0.2876 | SupCon=6.2311 | LR=8.54e-04 | time=67s
+    Ep 010/20 | Total=3.3927 | Focal=0.2772 | SupCon=6.2311 | LR=7.50e-04 | time=65s
+    Ep 011/20 | Total=3.3824 | Focal=0.2669 | SupCon=6.2310 | LR=6.30e-04 | time=68s
+    Ep 012/20 | Total=3.3735 | Focal=0.2580 | SupCon=6.2310 | LR=5.01e-04 | time=84s
+    Ep 013/20 | Total=3.3678 | Focal=0.2523 | SupCon=6.2310 | LR=3.71e-04 | time=84s
+    Ep 014/20 | Total=3.3590 | Focal=0.2435 | SupCon=6.2310 | LR=2.51e-04 | time=68s
+    Ep 015/20 | Total=3.3516 | Focal=0.2361 | SupCon=6.2310 | LR=1.47e-04 | time=65s
+    Ep 016/20 | Total=3.3460 | Focal=0.2306 | SupCon=6.2310 | LR=6.79e-05 | time=65s
+    Ep 017/20 | Total=3.3426 | Focal=0.2271 | SupCon=6.2310 | LR=1.80e-05 | time=65s
+    Ep 018/20 | Total=3.3397 | Focal=0.2242 | SupCon=6.2310 | LR=1.00e-03 | time=65s
+    Ep 019/20 | Total=3.3707 | Focal=0.2552 | SupCon=6.2310 | LR=9.96e-04 | time=65s
+    Ep 020/20 | Total=3.3663 | Focal=0.2508 | SupCon=6.2311 | LR=9.83e-04 | time=65s
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+    Ep 001/60 | Tr loss=0.1996 acc=0.7146 f1=0.6884 | Va loss=0.3597 acc=0.6142 f1=0.5887 | LR=4.97e-04 | 1130s
+    Ep 002/60 | Tr loss=0.1640 acc=0.7398 f1=0.7159 | Va loss=0.3356 acc=0.6817 f1=0.6515 | LR=4.88e-04 | 459s
+    Ep 003/60 | Tr loss=0.1409 acc=0.7625 f1=0.7403 | Va loss=0.3499 acc=0.6695 f1=0.6573 | LR=4.73e-04 | 519s
+    Ep 004/60 | Tr loss=0.1248 acc=0.7788 f1=0.7571 | Va loss=0.3909 acc=0.6312 f1=0.6130 | LR=4.52e-04 | 435s
+    Ep 005/60 | Tr loss=0.1103 acc=0.7979 f1=0.7773 | Va loss=0.3758 acc=0.6540 f1=0.6460 | LR=4.27e-04 | 520s
+    Ep 006/60 | Tr loss=0.1005 acc=0.8128 f1=0.7922 | Va loss=0.3878 acc=0.6408 f1=0.6261 | LR=3.97e-04 | 435s
+    Ep 007/60 | Tr loss=0.0884 acc=0.8296 f1=0.8093 | Va loss=0.3750 acc=0.6532 f1=0.6410 | LR=3.64e-04 | 520s
+    Ep 008/60 | Tr loss=0.0792 acc=0.8447 f1=0.8254 | Va loss=0.3937 acc=0.6638 f1=0.6456 | LR=3.27e-04 | 435s
+    Ep 009/60 | Tr loss=0.0700 acc=0.8591 f1=0.8406 | Va loss=0.4313 acc=0.6844 f1=0.6670 | LR=2.89e-04 | 520s
+    Ep 010/60 | Tr loss=0.0628 acc=0.8724 f1=0.8543 | Va loss=0.4660 acc=0.6887 f1=0.6666 | LR=2.50e-04 | 435s
+^C
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 374, in _run_epoch
+    losses.append(loss.item())
+KeyboardInterrupt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$
+
+
+
+---BREAKKK---03RD JULY, 2026
+
+login as: rvce
+rvce@172.16.18.6's password:
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-14-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+10 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+*** System restart required ***
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+Last login: Fri Jul  3 10:42:24 2026 from 172.16.65.142
+rvce@117csrdz420:~$ ssh csegpuserver@172.16.18.2
+csegpuserver@172.16.18.2's password:
+Permission denied, please try again.
+csegpuserver@172.16.18.2's password:
+ **********************************************************
+* WARNING: GPU SERVER - DO NOT STOP THE SCREEN SESSIONS *
+**********************************************************
+
+Last login: Fri Jul  3 06:03:12 2026 from 100.113.102.15
+csegpuserver@rvcse:~$ nvide-smi
+nvide-smi: command not found
+csegpuserver@rvcse:~$ nvidia-smi
+Fri Jul  3 11:32:16 2026
++-------------------------------------------------------------------------------                                                                                                             ----------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version:                                                                                                              13.0     |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Un                                                                                                             corr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  C                                                                                                             ompute M. |
+|                                         |                        |                                                                                                                            MIG M. |
+|=========================================+========================+============                                                                                                             ==========|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                                                                                                                                 0 |
+| N/A   46C    P0             39W /  250W |   13016MiB /  40960MiB |      0%                                                                                                                   Default |
+|                                         |                        |                                                                                                                          Disabled |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                                                                                                                               N/A |
+| 39%   34C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%                                                                                                                   Default |
+|                                         |                        |                                                                                                                               N/A |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                                                                                                                                 0 |
+| N/A   32C    P0             34W /  250W |   10082MiB /  40960MiB |      0%                                                                                                                   Default |
+|                                         |                        |                                                                                                                          Disabled |
++-----------------------------------------+------------------------+------------                                                                                                             ----------+
+
++-------------------------------------------------------------------------------                                                                                                             ----------+
+| Processes:                                                                                                                                                                                           |
+|  GPU   GI   CI              PID   Type   Process name                        G                                                                                                             PU Memory |
+|        ID   ID                                                               U                                                                                                             sage      |
+|===============================================================================                                                                                                             ==========|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                                                                                                                                     4MiB |
+|    0   N/A  N/A         2818363      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x                                                                                                                    9380MiB |
+|    0   N/A  N/A         2852024      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x                                                                                                                    3604MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                                                                                                                                    88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                                                                                                                                   5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                                                                                                                                     4MiB |
+|    2   N/A  N/A         2818364      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x                                                                                                                    6474MiB |
+|    2   N/A  N/A         2852025      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x                                                                                                                    3576MiB |
++-------------------------------------------------------------------------------                                                                                                             ----------+
+csegpuserver@rvcse:~$ cd ..
+csegpuserver@rvcse:/home$
+csegpuserver@rvcse:/home$ cd ..
+csegpuserver@rvcse:/$ cd media/
+csegpuserver@rvcse:/media$ ls
+csegpuserver  rvcse22
+csegpuserver@rvcse:/media$ cd rvcse22/
+csegpuserver@rvcse:/media/rvcse22$ ls
+CSERV  majorproject2021
+csegpuserver@rvcse:/media/rvcse22$ cd CSERV/
+csegpuserver@rvcse:/media/rvcse22/CSERV$ ls
+ 17216183                                                       graph2                      new360o                     sleepproj
+ 25022025                                                       graph-rca                   new_8s_1                    SMG_PRM_FS
+ 290126                                                         greywolf                    new_8s_2                    spwm
+ activate_nvhpc_cuda13.sh                                       hashhop                     new_maj                    'sudo su.txt'
+ Al_fermi                                                       histtab26.txt               new_maj_10                  SVARA
+ Alzeheimer                                                     hologram                    new_maj_11                  tableau-server-2024-2-13_amd64.deb
+ amazonML                                                       iddx                        new_maj_9                   Tarun
+ apptainer_build                                                image2sketch                NiMn2O4222                  test.py
+ apptainer_cache                                               'image2sketch'$'\n\n\n'      NiMnO_CPU                   tl_backup
+ backup_dataset                                                 ImageCaptioning             NMO2O4_222                  tmp
+ backup_dataset2                                                Inference_Testing           NPS_LAB_EL                  TrafficFlowPrediction
+ cgmrict                                                        jupyter_workspace           npswork                     train2017
+ ClinicalNotesICU                                               kortex_sem5                 nvhpc_cuda13                train2017.zip
+ coco                                                           Linux                       ollama_models               train2017.zip.1
+ CSB                                                            llm_models.tar.gz           p53                         tsn_r50_320p_1x1x8_150e_activitynet_video_flow_20200804-13313f52.pth
+ cse                                                            lost+found                  PAKML.zip                   Untitled
+ CT-ADE                                                         maj11                       pip_cache                  'Untitled Folder'
+ CT-ADE_unzipped                                                maj_nms_10s                 pointpillars                Untitled.ipynb
+ cuda-keyring_1.0-1_all.deb                                     maj_nms_8s                  ppe_sur                     v9-models
+ cuda-repo-ubuntu2204-11-8-local_11.8.0-520.61.05-1_amd64.deb   maj_nms_9s                  proj                        vdaproj
+ cuda-repo-ubuntu2204-12-1-local_12.1.0-530.30.02-1_amd64.deb   major8                      pslibrary                   vdaquant
+ cuda-repo-ubuntu2404-12-8-local_12.8.0-570.86.10-1_amd64.deb   Major_project_112_114_151   python-packages             vehicle_9maj
+ customfolder                                                   maj_trial                   q-e-qe-7.5                  vehicle_major
+ dap                                                            medlm                       q-e-qe-7.5-cpu              vehicle_major_1
+ dcn                                                            meteor                      q-e-qe-7.5-gpu-compile      vehicle_train_maj
+ DeepRadText                                                    mgnn-ipv                    q-e-qe-7.5-gpu-opt          vihadhar
+'Desktop files 211025'                                          moldy                       QE+YAMBO                    vsw_dusp15-DOCK_HTVS_1.py
+ dnai                                                           mp                          QuantumSepsis               Worklet25SI03RV_PRISM
+ dusp_phv                                                       msv                         QuantumSepsis_checkpoints   Worklet25SI03RV_PRISM.zip
+ envs                                                           ne                          README.md                   wsl_env
+ flows                                                          new                         samsung_24IV48RV            WSL-Framework-main
+ fmaEL                                                          new_1                       SANIDP                      WSL_project
+ fogRemoval                                                     new10                       sdg                         yambo-5.3.0
+ forgettingcurve                                                new11s                      sipp                        yolo11n.pt
+ genai                                                          new3608s                    Sleep_CK_26                 yolov9s.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV$ cd Sleep_CK_26/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd /media/rvcse22/C                                                                                                             SERV/Sleep_CK_26/MC_KANT
+CUDA_VISIBLE_DEVICES=2 python3 train_mc_kant.py --skip-install
+-bash: cd: too many arguments
+python3: can't open file '/media/rvcse22/CSERV/Sleep_CK_26/train_mc_kant.py': [Errno 2] No such file or directory
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+[MC-KANT] Skipping completed fold 2.
+
+============================================================
+  Fold 3 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=75,825  seq_train=74,286  val=8,112  test=9,124
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 11/60
+    Ep 011/60 | Tr loss=0.0556 acc=0.8843 f1=0.8672 | Va loss=0.5049 acc=0.6921 f1=0.6650 | LR=2.11e-04 | 618s
+    Ep 012/60 | Tr loss=0.0502 acc=0.8931 f1=0.8767 | Va loss=0.5656 acc=0.6921 f1=0.6651 | LR=1.73e-04 | 529s
+    Ep 013/60 | Tr loss=0.0440 acc=0.9042 f1=0.8888 | Va loss=0.5447 acc=0.6873 f1=0.6595 | LR=1.37e-04 | 1055s
+    Ep 014/60 | Tr loss=0.0391 acc=0.9105 f1=0.8957 | Va loss=0.5664 acc=0.6972 f1=0.6692 | LR=1.03e-04 | 1150s
+    Ep 015/60 | Tr loss=0.0350 acc=0.9202 f1=0.9066 | Va loss=0.6100 acc=0.7003 f1=0.6710 | LR=7.37e-05 | 1115s
+    Ep 016/60 | Tr loss=0.0317 acc=0.9275 f1=0.9148 | Va loss=0.6528 acc=0.6964 f1=0.6659 | LR=4.82e-05 | 1118s
+    Ep 017/60 | Tr loss=0.0292 acc=0.9314 f1=0.9190 | Va loss=0.6437 acc=0.6954 f1=0.6642 | LR=2.77e-05 | 1118s
+^C
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 374, in _run_epoch
+    losses.append(loss.item())
+KeyboardInterrupt
+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+[MC-KANT] Skipping completed fold 2.
+
+============================================================
+  Fold 3 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=75,825  seq_train=74,286  val=8,112  test=9,124
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 18/60
+    Ep 018/60 | Tr loss=0.0270 acc=0.9350 f1=0.9236 | Va loss=0.6503 acc=0.7034 f1=0.6701 | LR=1.27e-05 | 1148s
+    Ep 019/60 | Tr loss=0.0257 acc=0.9384 f1=0.9271 | Va loss=0.6669 acc=0.6961 f1=0.6655 | LR=3.57e-06 | 1135s
+    Ep 020/60 | Tr loss=0.0244 acc=0.9411 f1=0.9300 | Va loss=0.6753 acc=0.7027 f1=0.6691 | LR=5.00e-04 | 470s
+    Ep 021/60 | Tr loss=0.0642 acc=0.8740 f1=0.8559 | Va loss=0.4307 acc=0.6900 f1=0.6603 | LR=4.99e-04 | 435s
+    Ep 022/60 | Tr loss=0.0581 acc=0.8852 f1=0.8684 | Va loss=0.4769 acc=0.7099 f1=0.6776 | LR=4.97e-04 | 1075s
+    Ep 023/60 | Tr loss=0.0550 acc=0.8867 f1=0.8698 | Va loss=0.5743 acc=0.6548 f1=0.6340 | LR=4.93e-04 | 1115s
+    Ep 024/60 | Tr loss=0.0519 acc=0.8931 f1=0.8769 | Va loss=0.5398 acc=0.6429 f1=0.6303 | LR=4.88e-04 | 1101s
+    Ep 025/60 | Tr loss=0.0507 acc=0.8977 f1=0.8817 | Va loss=0.5712 acc=0.6734 f1=0.6462 | LR=4.81e-04 | 1155s
+^C
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 374, in _run_epoch
+    losses.append(loss.item())
+KeyboardInterrupt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$
+
+
+
+
+
+
+
+
+
+
+---brwakkk---
+
+
+
+
+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    0   N/A  N/A         2818363      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x       9380MiB |
+|    0   N/A  N/A         2852024      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x       3606MiB |
+|    0   N/A  N/A         2916733      C   python                                13968MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    2   N/A  N/A         2818364      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x       6474MiB |
+|    2   N/A  N/A         2852025      C   ...V/q-e-qe-7.5-gpu-opt/bin/pw.x       3580MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ exit
+logout
+Connection to 172.16.18.2 closed.
+rvce@117csrdz420:~$ ssh csegpuserver@172.16.18.2
+csegpuserver@172.16.18.2's password:
+ **********************************************************
+* WARNING: GPU SERVER - DO NOT STOP THE SCREEN SESSIONS *
+**********************************************************
+
+Last login: Fri Jul  3 11:31:58 2026 from 172.16.18.6
+csegpuserver@rvcse:~$ cd ..
+csegpuserver@rvcse:/home$ cd ..
+csegpuserver@rvcse:/$ cd media/rvcse22/CSERV/Sleep_CK_26/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ls
+MC_KANT  processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd MC_KANT/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ls
+mc_kant  mc_kant_checkpoints_a100  requirements_mc_kant.txt  train_mc_kant.py  verify_mc_kant.py
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd mc_kant
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$ ls
+contrastive.py  dataset.py  feature_extractor.py  __init__.py  kan_head.py  model.py  __pycache__  train.py  unet_encoder.py
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd mc_kant_checkpoints_a100/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant_checkpoints_a100$ ls
+mc_kant_fold01_best.pt  mc_kant_fold02_best.pt  mc_kant_resume.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant_checkpoints_a100$ nano mc_kant_best.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant_checkpoints_a100$ ls
+mc_kant_fold01_best.pt  mc_kant_fold02_best.pt  mc_kant_resume.pt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant_checkpoints_a100$ cd ..
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nano requirements_mc_kant.txt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nano train_mc_kant.py
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ exit
+logout
+Connection to 172.16.18.2 closed.
+rvce@117csrdz420:~$
+
+
+
+
+---breakkk---
+6th July, 2026
+
+
+
+
+
+
+
+
+login as: rvce
+rvce@172.16.18.6's password:
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-14-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+11 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+*** System restart required ***
+
+2 devices have a firmware upgrade available.
+Run `fwupdmgr get-upgrades` for more information.
+
+Last login: Fri Jul  3 14:10:35 2026 from 172.16.65.142
+rvce@117csrdz420:~$ ssh csegpuserver@172.16.18.2
+csegpuserver@172.16.18.2's password:
+ **********************************************************
+* WARNING: GPU SERVER - DO NOT STOP THE SCREEN SESSIONS *
+**********************************************************
+
+Last login: Mon Jul  6 00:50:04 2026 from 100.113.102.15
+csegpuserver@rvcse:~$ cd ..
+csegpuserver@rvcse:/home$ cd ..
+csegpuserver@rvcse:/$ cd ..
+csegpuserver@rvcse:/$ cd media/rvcse22/CSERV/Sleep_CK_26/
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ ls
+MC_KANT  processed_data
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26$ cd /media/rvcse22/CSERV/Sle                                                                                                             ep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.                                                                                                             pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvi                                                                                                             dia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/pytho                                                                                                             n3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/li                                                                                                             b/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3                                                                                                             .10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.l                                                                                                             ocal/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3                                                                                                             .10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages                                                                                                              (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.1                                                                                                             0/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpus                                                                                                             erver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegp                                                                                                             userver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpus                                                                                                             erver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver                                                                                                             /.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserve                                                                                                             r/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserve                                                                                                             r/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuser                                                                                                             ver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpus                                                                                                             erver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpus                                                                                                             erver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.l                                                                                                             ocal/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/                                                                                                             .local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/py                                                                                                             thon3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/py                                                                                                             thon3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.loca                                                                                                             l/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.                                                                                                             1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/l                                                                                                             ib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10                                                                                                             /site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.loca                                                                                                             l/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/                                                                                                             python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data                                                                                                             /numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+[MC-KANT] Skipping completed fold 2.
+
+============================================================
+  Fold 3 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=75,825  seq_train=74,286  val=8,112  test=9,124
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 26/60
+    Ep 026/60 | Tr loss=0.0442 acc=0.9064 f1=0.8914 | Va loss=0.4933 acc=0.7239                                                                                                              f1=0.6943 | LR=4.73e-04 | 832s
+    Ep 027/60 | Tr loss=0.0411 acc=0.9118 f1=0.8971 | Va loss=0.6041 acc=0.6786                                                                                                              f1=0.6513 | LR=4.63e-04 | 432s
+    Ep 028/60 | Tr loss=0.0389 acc=0.9183 f1=0.9045 | Va loss=0.5537 acc=0.6647                                                                                                              f1=0.6371 | LR=4.52e-04 | 433s
+    Ep 029/60 | Tr loss=0.0363 acc=0.9205 f1=0.9066 | Va loss=0.6430 acc=0.6912                                                                                                              f1=0.6570 | LR=4.40e-04 | 433s
+    Ep 030/60 | Tr loss=0.0332 acc=0.9255 f1=0.9129 | Va loss=0.5709 acc=0.6902                                                                                                              f1=0.6593 | LR=4.27e-04 | 433s
+    Ep 031/60 | Tr loss=0.0318 acc=0.9299 f1=0.9178 | Va loss=0.5646 acc=0.7097                                                                                                              f1=0.6790 | LR=4.12e-04 | 433s
+    Ep 032/60 | Tr loss=0.0302 acc=0.9343 f1=0.9224 | Va loss=0.5502 acc=0.6903                                                                                                              f1=0.6639 | LR=3.97e-04 | 433s
+    Ep 033/60 | Tr loss=0.0273 acc=0.9386 f1=0.9276 | Va loss=0.6367 acc=0.6801                                                                                                              f1=0.6495 | LR=3.81e-04 | 433s
+    Ep 034/60 | Tr loss=0.0243 acc=0.9434 f1=0.9331 | Va loss=0.5613 acc=0.7109                                                                                                              f1=0.6764 | LR=3.64e-04 | 433s
+    Ep 035/60 | Tr loss=0.0240 acc=0.9468 f1=0.9367 | Va loss=0.5938 acc=0.6975                                                                                                              f1=0.6675 | LR=3.46e-04 | 433s
+    Ep 036/60 | Tr loss=0.0219 acc=0.9496 f1=0.9402 | Va loss=0.6274 acc=0.6988                                                                                                              f1=0.6700 | LR=3.27e-04 | 433s
+    Ep 037/60 | Tr loss=0.0201 acc=0.9545 f1=0.9454 | Va loss=0.6911 acc=0.6794                                                                                                              f1=0.6481 | LR=3.09e-04 | 433s
+    Ep 038/60 | Tr loss=0.0179 acc=0.9575 f1=0.9493 | Va loss=0.7428 acc=0.6828                                                                                                              f1=0.6480 | LR=2.89e-04 | 433s
+    Early stopping at epoch 38
+
+  [Fold 3] Test Results
+    Loss: 0.8757  Acc: 0.6336  Macro-F1: 0.5953
+    Classification Report (0=W, 1=N1, 2=N2, 3=N3, 4=REM):
+              precision    recall  f1-score   support
+
+           W     0.7703    0.6928    0.7295      2217
+          N1     0.2943    0.5006    0.3707       839
+          N2     0.8349    0.6173    0.7098      3752
+          N3     0.6822    0.6766    0.6794      1209
+         REM     0.3994    0.6242    0.4871      1107
+
+    accuracy                         0.6336      9124
+   macro avg     0.5962    0.6223    0.5953      9124
+weighted avg     0.6964    0.6336    0.6524      9124
+
+    Confusion Matrix:
+[[1536  520   25    3  133]
+ [ 161  420  120    3  135]
+ [ 144  274 2316  375  643]
+ [ 116   11  136  818  128]
+ [  37  202  177    0  691]]
+    Checkpoint saved: ./mc_kant_checkpoints_a100/mc_kant_fold03_best.pt
+    Resume marker advanced to fold 4.
+
+============================================================
+  Fold 4 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=76,845  seq_train=75,306  val=7,523  test=8,693
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase A] Contrastive pre-training for 20 epochs
+    Ep 001/20 | Total=4.3257 | Focal=0.4944 | SupCon=7.6625 | LR=9.33e-04 | time                                                                                                             =378s
+    Ep 002/20 | Total=3.4850 | Focal=0.3687 | SupCon=6.2326 | LR=7.50e-04 | time                                                                                                             =65s
+    Ep 003/20 | Total=3.4539 | Focal=0.3381 | SupCon=6.2316 | LR=5.01e-04 | time                                                                                                             =66s
+    Ep 004/20 | Total=3.4356 | Focal=0.3200 | SupCon=6.2313 | LR=2.51e-04 | time                                                                                                             =65s
+    Ep 005/20 | Total=3.4231 | Focal=0.3075 | SupCon=6.2312 | LR=6.79e-05 | time                                                                                                             =65s
+    Ep 006/20 | Total=3.4152 | Focal=0.2996 | SupCon=6.2312 | LR=1.00e-03 | time                                                                                                             =65s
+    Ep 007/20 | Total=3.4372 | Focal=0.3217 | SupCon=6.2312 | LR=9.83e-04 | time=65s
+    Ep 008/20 | Total=3.4274 | Focal=0.3120 | SupCon=6.2309 | LR=9.33e-04 | time=65s
+    Ep 009/20 | Total=3.4194 | Focal=0.3040 | SupCon=6.2309 | LR=8.54e-04 | time=65s
+    Ep 010/20 | Total=3.4123 | Focal=0.2969 | SupCon=6.2308 | LR=7.50e-04 | time=65s
+    Ep 011/20 | Total=3.4046 | Focal=0.2892 | SupCon=6.2308 | LR=6.30e-04 | time=65s
+    Ep 012/20 | Total=3.3971 | Focal=0.2817 | SupCon=6.2308 | LR=5.01e-04 | time=65s
+    Ep 013/20 | Total=3.3910 | Focal=0.2756 | SupCon=6.2308 | LR=3.71e-04 | time=65s
+    Ep 014/20 | Total=3.3827 | Focal=0.2673 | SupCon=6.2308 | LR=2.51e-04 | time=65s
+    Ep 015/20 | Total=3.3754 | Focal=0.2600 | SupCon=6.2308 | LR=1.47e-04 | time=65s
+    Ep 016/20 | Total=3.3699 | Focal=0.2545 | SupCon=6.2308 | LR=6.79e-05 | time=65s
+    Ep 017/20 | Total=3.3635 | Focal=0.2480 | SupCon=6.2308 | LR=1.80e-05 | time=66s
+    Ep 018/20 | Total=3.3598 | Focal=0.2444 | SupCon=6.2308 | LR=1.00e-03 | time=73s
+    Ep 019/20 | Total=3.3931 | Focal=0.2777 | SupCon=6.2309 | LR=9.96e-04 | time=65s
+    Ep 020/20 | Total=3.3856 | Focal=0.2702 | SupCon=6.2309 | LR=9.83e-04 | time=65s
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+    Ep 001/60 | Tr loss=0.2180 acc=0.7010 f1=0.6762 | Va loss=0.2965 acc=0.6403 f1=0.6080 | LR=4.97e-04 | 1224s
+^X
+
+
+^C
+
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 363, in _run_epoch
+    scaler.scale(loss).backward()
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Mon Jul  6 14:48:42 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   64C    P0             47W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 42%   29C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   26C    P0             30W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Mon Jul  6 14:48:47 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   63C    P0             46W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 41%   29C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   26C    P0             30W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Mon Jul  6 14:48:48 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   62C    P0             45W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 42%   29C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   26C    P0             31W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Mon Jul  6 14:48:48 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   62C    P0             45W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 41%   29C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   26C    P0             30W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Mon Jul  6 14:48:49 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   62C    P0             45W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 41%   29C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   26C    P0             30W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+[MC-KANT] Skipping completed fold 2.
+[MC-KANT] Skipping completed fold 3.
+
+============================================================
+  Fold 4 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=76,845  seq_train=75,306  val=7,523  test=8,693
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 2/60
+    Ep 002/60 | Tr loss=0.1692 acc=0.7367 f1=0.7165 | Va loss=0.3354 acc=0.6145 f1=0.5884 | LR=4.88e-04 | 591s
+    Ep 003/60 | Tr loss=0.1474 acc=0.7578 f1=0.7385 | Va loss=0.3223 acc=0.6840 f1=0.6270 | LR=4.73e-04 | 437s
+    Ep 004/60 | Tr loss=0.1309 acc=0.7781 f1=0.7597 | Va loss=0.3425 acc=0.6442 f1=0.6033 | LR=4.52e-04 | 437s
+    Ep 005/60 | Tr loss=0.1158 acc=0.7974 f1=0.7793 | Va loss=0.3534 acc=0.6192 f1=0.5967 | LR=4.27e-04 | 438s
+^C
+
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 374, in _run_epoch
+    losses.append(loss.item())
+KeyboardInterrupt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ^[[200~echo $TMUX~
+echo: command not found
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ echo $TMUX
+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ^C
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ ^[[200~tmux new -s mckant~
+tmux: command not found
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ tmux new -s mckant
+[exited]
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+[MC-KANT] Skipping completed fold 2.
+[MC-KANT] Skipping completed fold 3.
+
+============================================================
+  Fold 4 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=76,845  seq_train=75,306  val=7,523  test=8,693
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 6/60
+^C
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 352, in _run_epoch
+    for batch_i, batch in enumerate(loader):
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1402, in _get_data
+    success, data = self._try_get_data()
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1243, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/usr/lib/python3.10/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/usr/lib/python3.10/threading.py", line 324, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ nvidia-smi
+Mon Jul  6 15:32:39 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.126.18             Driver Version: 580.126.18     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-PCIE-40GB          Off |   00000000:18:00.0 Off |                    0 |
+| N/A   47C    P0             38W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA T400                    Off |   00000000:5E:00.0 Off |                  N/A |
+| 39%   33C    P8            N/A  /   31W |     105MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-PCIE-40GB          Off |   00000000:86:00.0 Off |                    0 |
+| N/A   31C    P0             31W /  250W |      14MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                       88MiB |
+|    1   N/A  N/A         1879743      G   /usr/bin/gnome-shell                      5MiB |
+|    2   N/A  N/A         1879475      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ cd /media/rvcse22/CSERV/Sleep_CK_26/MC_KANT && python3 train_mc_kant.py --install-torch
+[MC-KANT] Installing: torch>=2.1 torchvision>=0.16 --index-url https://download.pytorch.org/whl/cu121
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://download.pytorch.org/whl/cu121, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch>=2.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (2.5.1+cu121)
+Requirement already satisfied: torchvision>=0.16 in /home/csegpuserver/.local/lib/python3.10/site-packages (0.20.1+cu121)
+Requirement already satisfied: filelock in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (4.15.0)
+Requirement already satisfied: networkx in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=2.1) (3.1.4)
+Requirement already satisfied: fsspec in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2026.3.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (12.1.105)
+Requirement already satisfied: triton==3.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torch>=2.1) (1.13.1)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/csegpuserver/.local/lib/python3.10/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=2.1) (12.9.86)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from sympy==1.13.1->torch>=2.1) (1.3.0)
+Requirement already satisfied: numpy in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (2.2.6)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from torchvision>=0.16) (12.2.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/csegpuserver/.local/lib/python3.10/site-packages (from jinja2->torch>=2.1) (3.0.3)
+========================================================================
+  MC-KANT A100 Training
+  data_dir: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+  out_dir : ./mc_kant_checkpoints_a100
+========================================================================
+[MC-KANT] Device: cuda
+[MC-KANT] CUDA GPU: NVIDIA A100-PCIE-40GB (39.5 GB, capability 8.0)
+[MC-KANT] torch=2.5.1+cu121 cuda=12.1
+[MC-KANT] AMP enabled: bf16
+[MC-KANT] Found 100 subjects in: /media/rvcse22/CSERV/Sleep_CK_26/processed_data/numpy_subjects
+[MC-KANT] Resuming from: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+[MC-KANT] Skipping completed fold 1.
+[MC-KANT] Skipping completed fold 2.
+[MC-KANT] Skipping completed fold 3.
+
+============================================================
+  Fold 4 / 10
+============================================================
+  Subjects → train: 81, val: 9, test: 10
+  Computing normalisation stats...
+  Channels: 6, done.
+  Building datasets...
+  Datasets ready: pretrain=76,845  seq_train=75,306  val=7,523  test=8,693
+  Batch sizes: pretrain=256, seq_finetune=32
+  Parameters: 6,408,288 total
+    eeg_extractor: 3,492,384
+    proj_head: 49,792
+    unet: 2,616,768
+    kan_head: 249,344
+
+  [Phase B] Sequence fine-tuning for 60 epochs (seq_len=20)
+  Resuming Phase B at epoch 6/60
+    Ep 006/60 | Tr loss=0.0987 acc=0.8215 f1=0.8041 | Va loss=0.3403 acc=0.6411 f1=0.6059 | LR=3.97e-04 | 604s
+    Ep 007/60 | Tr loss=0.0888 acc=0.8362 f1=0.8197 | Va loss=0.4787 acc=0.6469 f1=0.6016 | LR=3.64e-04 | 437s
+    Ep 008/60 | Tr loss=0.0796 acc=0.8496 f1=0.8334 | Va loss=0.4017 acc=0.6569 f1=0.6159 | LR=3.27e-04 | 438s
+    Ep 009/60 | Tr loss=0.0713 acc=0.8642 f1=0.8482 | Va loss=0.3718 acc=0.6699 f1=0.6217 | LR=2.89e-04 | 438s
+    Ep 010/60 | Tr loss=0.0607 acc=0.8780 f1=0.8629 | Va loss=0.4011 acc=0.6690 f1=0.6188 | LR=2.50e-04 | 438s
+    Ep 011/60 | Tr loss=0.0549 acc=0.8894 f1=0.8747 | Va loss=0.4954 acc=0.6569 f1=0.6089 | LR=2.11e-04 | 484s
+    Ep 012/60 | Tr loss=0.0487 acc=0.8980 f1=0.8840 | Va loss=0.4757 acc=0.6551 f1=0.6030 | LR=1.73e-04 | 438s
+    Ep 013/60 | Tr loss=0.0441 acc=0.9068 f1=0.8938 | Va loss=0.5051 acc=0.6294 f1=0.5963 | LR=1.37e-04 | 438s
+    Ep 014/60 | Tr loss=0.0392 acc=0.9146 f1=0.9022 | Va loss=0.4995 acc=0.6670 f1=0.6190 | LR=1.03e-04 | 438s
+    Ep 015/60 | Tr loss=0.0349 acc=0.9222 f1=0.9104 | Va loss=0.5030 acc=0.6713 f1=0.6289 | LR=7.37e-05 | 438s
+    Ep 016/60 | Tr loss=0.0316 acc=0.9276 f1=0.9165 | Va loss=0.4968 acc=0.6638 f1=0.6207 | LR=4.82e-05 | 439s
+    Ep 017/60 | Tr loss=0.0280 acc=0.9338 f1=0.9231 | Va loss=0.5232 acc=0.6717 f1=0.6227 | LR=2.77e-05 | 469s
+    Ep 018/60 | Tr loss=0.0263 acc=0.9371 f1=0.9271 | Va loss=0.5431 acc=0.6798 f1=0.6288 | LR=1.27e-05 | 438s
+    Ep 019/60 | Tr loss=0.0254 acc=0.9396 f1=0.9300 | Va loss=0.5506 acc=0.6743 f1=0.6239 | LR=3.57e-06 | 439s
+    Ep 020/60 | Tr loss=0.0250 acc=0.9394 f1=0.9299 | Va loss=0.5708 acc=0.6681 f1=0.6190 | LR=5.00e-04 | 509s
+    Ep 021/60 | Tr loss=0.0665 acc=0.8756 f1=0.8598 | Va loss=0.4795 acc=0.6039 f1=0.5700 | LR=4.99e-04 | 473s
+^C
+[MC-KANT] Paused. Resume with the same command; saved: ./mc_kant_checkpoints_a100/mc_kant_resume.pt
+Traceback (most recent call last):
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 186, in <module>
+    main()
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/train_mc_kant.py", line 182, in main
+    train_kfold(args)
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 701, in train_kfold
+    tr = _run_epoch(
+  File "/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT/mc_kant/train.py", line 363, in _run_epoch
+    scaler.scale(loss).backward()
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/home/csegpuserver/.local/lib/python3.10/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+csegpuserver@rvcse:/media/rvcse22/CSERV/Sleep_CK_26/MC_KANT$ exit
+logout
+Connection to 172.16.18.2 closed.
+rvce@117csrdz420:~$

@@ -1,0 +1,451 @@
+PS C:\Users\kavin\Projects\sleep> python --version; python -m pip --version; nvidia-smi; python -m pip install torch scikit-learn
+Python 3.10.0
+pip 21.2.3 from C:\Users\kavin\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)
+Fri Apr 24 00:33:44 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 581.95                 Driver Version: 581.95         CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3050 ...  WDDM  |   00000000:01:00.0 Off |                  N/A |
+| N/A   51C    P8              4W /   95W |     695MiB /   6144MiB |     11%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            3420    C+G   ...ow\app-1.4.917\Wispr Flow.exe      N/A      |
+|    0   N/A  N/A            3544    C+G   ....0.3912.72\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A            3968    C+G   ....0.3912.72\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A            4468    C+G   ...yb3d8bbwe\Notepad\Notepad.exe      N/A      |
+|    0   N/A  N/A            7860    C+G   ...\SubAgent\AlienFXSubAgent.exe      N/A      |
+|    0   N/A  N/A            9280    C+G   ...1g1gvanyjgm\WhatsApp.Root.exe      N/A      |
+|    0   N/A  N/A           10780    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           11044    C+G   ...ms\Microsoft VS Code\Code.exe      N/A      |
+|    0   N/A  N/A           11360    C+G   ...2txyewy\CrossDeviceResume.exe      N/A      |
+|    0   N/A  N/A           13776    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
+|    0   N/A  N/A           13784    C+G   ...y\StartMenuExperienceHost.exe      N/A      |
+|    0   N/A  N/A           15544    C+G   ...NVIDIA App\CEF\NVIDIA App.exe      N/A      |
+|    0   N/A  N/A           16020    C+G   ....0.3912.72\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           17432    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           18920    C+G   ...ow\app-1.4.917\Wispr Flow.exe      N/A      |
+|    0   N/A  N/A           20232    C+G   ...5n1h2txyewy\TextInputHost.exe      N/A      |
+|    0   N/A  N/A           22160    C+G   ...yb3d8bbwe\WindowsTerminal.exe      N/A      |
+|    0   N/A  N/A           26084    C+G   ...8bbwe\PhoneExperienceHost.exe      N/A      |
++-----------------------------------------------------------------------------------------+
+Requirement already satisfied: torch in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (2.11.0)
+Requirement already satisfied: scikit-learn in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (1.7.2)
+Requirement already satisfied: jinja2 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (3.1.6)
+Requirement already satisfied: typing-extensions>=4.10.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (4.15.0)
+Requirement already satisfied: fsspec>=0.8.5 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (2026.3.0)
+Requirement already satisfied: filelock in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (3.29.0)
+Requirement already satisfied: networkx>=2.5.1 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (3.4.2)
+Requirement already satisfied: setuptools<82 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (57.4.0)
+Requirement already satisfied: sympy>=1.13.3 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (1.14.0)
+Requirement already satisfied: threadpoolctl>=3.1.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: numpy>=1.22.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from scikit-learn) (2.2.6)
+Requirement already satisfied: scipy>=1.8.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from scikit-learn) (1.15.3)
+Requirement already satisfied: joblib>=1.2.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from sympy>=1.13.3->torch) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from jinja2->torch) (3.0.3)
+WARNING: You are using pip version 21.2.3; however, version 26.0.1 is available.
+You should consider upgrading via the 'C:\Users\kavin\AppData\Local\Programs\Python\Python310\python.exe -m pip install --upgrade pip' command.
+PS C:\Users\kavin\Projects\sleep> python train_cnn_sleep.py --data_dir "C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects" --out_dir "./checkpoints" --eeg_only --test_size 0.2 --val_size 0.0
+Found 100 subject files in: C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects
+Split subjects -> train: 80, val: 0, test: 20
+Epoch samples -> train: 74467, val: 0, test: 18955
+Training on device: cpu
+Epoch 001 | train loss=0.9834 acc=0.5542 f1m=0.5306
+Traceback (most recent call last):
+  File "C:\Users\kavin\Projects\sleep\train_cnn_sleep.py", line 401, in <module>
+    main(args)
+  File "C:\Users\kavin\Projects\sleep\train_cnn_sleep.py", line 291, in main
+    tr = run_epoch(model, train_loader, criterion, optimizer, device, train_mode=True)
+  File "C:\Users\kavin\Projects\sleep\train_cnn_sleep.py", line 178, in run_epoch
+    loss.backward()
+  File "C:\Users\kavin\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\_tensor.py", line 631, in backward
+    torch.autograd.backward(
+  File "C:\Users\kavin\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\autograd\__init__.py", line 381, in backward
+    _engine_run_backward(
+  File "C:\Users\kavin\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\autograd\graph.py", line 869, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+PS C:\Users\kavin\Projects\sleep> Get-ChildItem -Path ./checkpoints
+Get-ChildItem : Cannot find path 'C:\Users\kavin\Projects\sleep\checkpoints' because it does not 
+exist.
+At line:1 char:1
++ Get-ChildItem -Path ./checkpoints
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\kavin\...eep\checkpoints:String) [Get-ChildIt 
+   em], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, sys; print(f'Python Executable: {sys.executable}'); print(f'torch.__version__: {torch.__version__}'); print(f'torch.version.cuda: {torch.version.cuda}'); print(f'torch.cuda.is_available(): {torch.cuda.is_available()}'); print(f'torch.cuda.device_count(): {torch.cuda.device_count()}'); print(f'torch.cuda.get_device_name(0): {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"N/A\"}')"
+  File "<string>", line 1
+    import torch, sys; print(f'Python Executable: {sys.executable}'); print(f'torch.__version__: {torch.__version__}'); print(f'torch.version.cuda: {torch.version.cuda}'); print(f'torch.cuda.is_available(): {torch.cuda.is_available()}'); print(f'torch.cuda.device_count(): {torch.cuda.device_count()}'); print(f'torch.cuda.get_device_name(0): {torch.cuda.get_device_name(0) if torch.cuda.is_available() else " N/A\}')
+                                                                                                                                                                                                                                                                                                                                                                                                                                ^
+SyntaxError: f-string expression part cannot include a backslash
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, sys; print('Python Executable:', sys.executable); print('torch.__version__:', torch.__version__); print('torch.version.cuda:', torch.version.cuda); print('torch.cuda.is_available():', torch.cuda.is_available()); print('torch.cuda.device_count():', torch.cuda.device_count()); print('torch.cuda.get_device_name(0):', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'N/A')"
+Python Executable: C:\Users\kavin\AppData\Local\Programs\Python\Python310\python.exe
+torch.__version__: 2.11.0+cpu
+torch.version.cuda: None
+torch.cuda.is_available(): False
+torch.cuda.device_count(): 0
+torch.cuda.get_device_name(0): N/A
+PS C:\Users\kavin\Projects\sleep> python -m pip uninstall -y torch torchvision torchaudio
+Found existing installation: torch 2.11.0
+Uninstalling torch-2.11.0:
+  Successfully uninstalled torch-2.11.0
+WARNING: Skipping torchvision as it is not installed.
+WARNING: Skipping torchaudio as it is not installed.
+PS C:\Users\kavin\Projects\sleep> python -m pip install --upgrade pip
+Requirement already satisfied: pip in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (21.2.3)
+Collecting pip
+  Using cached pip-26.0.1-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 21.2.3
+    Uninstalling pip-21.2.3:
+      Successfully uninstalled pip-21.2.3
+Successfully installed pip-26.0.1
+PS C:\Users\kavin\Projects\sleep> python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting torch
+  Downloading https://download-r2.pytorch.org/whl/cu128/torch-2.11.0%2Bcu128-cp310-cp310-win_amd64.whl.metadata (29 kB)
+Collecting torchvision
+  Downloading https://download-r2.pytorch.org/whl/cu128/torchvision-0.26.0%2Bcu128-cp310-cp310-win_amd64.whl.metadata (5.6 kB)
+Collecting torchaudio
+  Downloading https://download-r2.pytorch.org/whl/cu128/torchaudio-2.11.0%2Bcu128-cp310-cp310-win_amd64.whl.metadata (7.0 kB)
+Requirement already satisfied: filelock in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (3.29.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (4.15.0)
+Requirement already satisfied: setuptools<82 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (57.4.0)
+Requirement already satisfied: sympy>=1.13.3 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (3.4.2)
+Requirement already satisfied: jinja2 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torch) (2026.3.0)
+Requirement already satisfied: numpy in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from torchvision) (2.2.6)
+Collecting pillow!=8.3.*,>=5.3.0 (from torchvision)
+  Downloading pillow-12.1.1-cp310-cp310-win_amd64.whl.metadata (9.0 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from sympy>=1.13.3->torch) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\kavin\appdata\local\programs\python\python310\lib\site-packages (from jinja2->torch) (3.0.3)
+Downloading https://download-r2.pytorch.org/whl/cu128/torch-2.11.0%2Bcu128-cp310-cp310-win_amd64.whl (2753.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 GB 10.0 MB/s  0:04:41
+Downloading https://download-r2.pytorch.org/whl/cu128/torchvision-0.26.0%2Bcu128-cp310-cp310-win_amd64.whl (9.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.0/9.0 MB 11.2 MB/s  0:00:00
+Downloading https://download-r2.pytorch.org/whl/cu128/torchaudio-2.11.0%2Bcu128-cp310-cp310-win_amd64.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 11.3 MB/s  0:00:00
+Downloading pillow-12.1.1-cp310-cp310-win_amd64.whl (7.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.0/7.0 MB 11.4 MB/s  0:00:00
+Installing collected packages: torchaudio, pillow, torch, torchvision
+Successfully installed pillow-12.1.1 torch-2.11.0+cu128 torchaudio-2.11.0+cu128 torchvision-0.26.0+cu128
+PS C:\Users\kavin\Projects\sleep> python -c "import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available()); print(torch.cuda.device_count()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'N/A')"
+2.11.0+cu128
+12.8
+True
+1
+NVIDIA GeForce RTX 3050 6GB Laptop GPU
+PS C:\Users\kavin\Projects\sleep> python train_cnn_sleep.py --data_dir "C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects" --out_dir "./checkpoints" --eeg_only --test_size 0.2 --val_size 0.0 --epochs 2 --batch_size 128
+Found 100 subject files in: C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects
+Split subjects -> train: 80, val: 0, test: 20
+Epoch samples -> train: 74467, val: 0, test: 18955
+Training on device: cuda
+Epoch 001 | train loss=0.9812 acc=0.5572 f1m=0.5311
+Epoch 002 | train loss=0.8467 acc=0.6318 f1m=0.6040
+
+Test Metrics
+Loss: 0.9690
+Accuracy: 0.6524
+Macro F1: 0.5747
+
+Classification Report (0=W, 1=N1, 2=N2, 3=N3, 4=R)
+              precision    recall  f1-score   support
+
+           0     0.7956    0.6923    0.7404      5964
+           1     0.1903    0.3453    0.2454      1532
+           2     0.7803    0.7006    0.7383      7910
+           3     0.5488    0.7332    0.6277      1833
+           4     0.5732    0.4790    0.5219      1716
+
+    accuracy                         0.6524     18955
+   macro avg     0.5776    0.5901    0.5747     18955
+weighted avg     0.6963    0.6524    0.6688     18955
+
+Confusion Matrix
+[[4129 1102  519   31  183]
+ [ 575  529  291    7  130]
+ [ 338  688 5542 1043  299]
+ [ 116    1  372 1344    0]
+ [  32  460  378   24  822]]
+
+Saved checkpoint: ./checkpoints\cnn_sleep_stage_best.pt
+Saved metrics: ./checkpoints\cnn_sleep_metrics.json
+PS C:\Users\kavin\Projects\sleep> python train_cnn_sleep.py --data_dir "C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects" --out_dir "./checkpoints" --eeg_only --test_size 0.2 --val_size 0.0 --epochs 30 --batch_size 128
+Found 100 subject files in: C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects
+Split subjects -> train: 80, val: 0, test: 20
+Epoch samples -> train: 74467, val: 0, test: 18955
+Training on device: cuda
+Epoch 001 | train loss=0.9811 acc=0.5588 f1m=0.5325
+Epoch 002 | train loss=0.8466 acc=0.6335 f1m=0.6059
+Epoch 003 | train loss=0.7981 acc=0.6559 f1m=0.6291
+Epoch 004 | train loss=0.7716 acc=0.6698 f1m=0.6433
+Epoch 005 | train loss=0.7540 acc=0.6805 f1m=0.6538
+Epoch 006 | train loss=0.7318 acc=0.6874 f1m=0.6608
+Epoch 007 | train loss=0.7133 acc=0.6959 f1m=0.6704
+Epoch 008 | train loss=0.7068 acc=0.7003 f1m=0.6744
+Epoch 009 | train loss=0.6934 acc=0.7036 f1m=0.6788
+Epoch 010 | train loss=0.6840 acc=0.7099 f1m=0.6843
+Epoch 011 | train loss=0.6778 acc=0.7127 f1m=0.6873
+Epoch 012 | train loss=0.6655 acc=0.7170 f1m=0.6922
+Epoch 013 | train loss=0.6604 acc=0.7170 f1m=0.6928
+Epoch 014 | train loss=0.6519 acc=0.7201 f1m=0.6961
+Epoch 015 | train loss=0.6426 acc=0.7251 f1m=0.7011
+Epoch 016 | train loss=0.6343 acc=0.7288 f1m=0.7048
+Epoch 017 | train loss=0.6289 acc=0.7301 f1m=0.7073
+Epoch 018 | train loss=0.6267 acc=0.7301 f1m=0.7065
+Epoch 019 | train loss=0.6196 acc=0.7313 f1m=0.7086
+Epoch 020 | train loss=0.6126 acc=0.7368 f1m=0.7136
+Epoch 021 | train loss=0.6109 acc=0.7367 f1m=0.7137
+Epoch 022 | train loss=0.6052 acc=0.7394 f1m=0.7170
+Epoch 023 | train loss=0.6000 acc=0.7407 f1m=0.7183
+Epoch 024 | train loss=0.5903 acc=0.7422 f1m=0.7201
+Epoch 025 | train loss=0.5889 acc=0.7436 f1m=0.7222
+Epoch 026 | train loss=0.5825 acc=0.7460 f1m=0.7248
+Epoch 027 | train loss=0.5826 acc=0.7455 f1m=0.7243
+Epoch 028 | train loss=0.5754 acc=0.7494 f1m=0.7282
+Epoch 029 | train loss=0.5719 acc=0.7504 f1m=0.7292
+Epoch 030 | train loss=0.5670 acc=0.7522 f1m=0.7316
+
+Test Metrics
+Loss: 1.1051
+Accuracy: 0.6202
+Macro F1: 0.5851
+
+Classification Report (0=W, 1=N1, 2=N2, 3=N3, 4=R)
+              precision    recall  f1-score   support
+
+           0     0.9048    0.5962    0.7188      5964
+           1     0.2134    0.6175    0.3172      1532
+           2     0.8353    0.6105    0.7054      7910
+           3     0.7069    0.6225    0.6620      1833
+           4     0.4012    0.7477    0.5222      1716
+
+    accuracy                         0.6202     18955
+   macro avg     0.6123    0.6389    0.5851     18955
+weighted avg     0.7552    0.6202    0.6575     18955
+
+Confusion Matrix
+[[3556 1822  163   18  405]
+ [ 225  946  107    3  251]
+ [  70 1325 4829  447 1239]
+ [  65   26  581 1141   20]
+ [  14  313  101    5 1283]]
+
+Saved checkpoint: ./checkpoints\cnn_sleep_stage_best.pt
+Saved metrics: ./checkpoints\cnn_sleep_metrics.json
+PS C:\Users\kavin\Projects\sleep> 
+
+
+
+
+
+
+testing
+python -m py_compile test_cnn_sleep.py
+PS C:\Users\kavin\Projects\sleep> python test_cnn_sleep.py --data_dir "C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects" --ckpt_path "./checkpoints/cnn_sleep_stage_best.pt" --test_size 0.2 --seed 42 --batch_size 128
+Traceback (most recent call last):
+  File "C:\Users\kavin\Projects\sleep\test_cnn_sleep.py", line 139, in <module>
+    main(args)
+  File "C:\Users\kavin\Projects\sleep\test_cnn_sleep.py", line 66, in main
+    ckpt = torch.load(args.ckpt_path, map_location="cpu")
+  File "C:\Users\kavin\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\serialization.py", line 1578, in load
+    raise pickle.UnpicklingError(_get_wo_message(str(e))) from None
+_pickle.UnpicklingError: Weights only load failed. This file can still be loaded, to do so you have two options, do those steps only if you trust the source of the checkpoint. 
+        (1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+        (2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+        WeightsUnpickler error: Unsupported global: GLOBAL numpy._core.multiarray._reconstruct was not an allowed global by default. Please use `torch.serialization.add_safe_globals([numpy._core.multiarray._reconstruct])` or the `torch.serialization.safe_globals([numpy._core.multiarray._reconstruct])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+PS C:\Users\kavin\Projects\sleep> (Get-Content test_cnn_sleep.py) -replace 'torch.load\(args.ckpt_path, map_location="cpu"\)', 'torch.load(args.ckpt_path, map_location="cpu", weights_only=False)' | Set-Content test_cnn_sleep.py
+PS C:\Users\kavin\Projects\sleep> python test_cnn_sleep.py --data_dir "C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects" --ckpt_path "./checkpoints/cnn_sleep_stage_best.pt" --test_size 0.2 --seed 42 --batch_size 128
+Testing on device: cuda
+Checkpoint: ./checkpoints/cnn_sleep_stage_best.pt
+Subjects -> train: 80, test: 20
+Epoch samples -> test: 18955
+
+Test Metrics
+Loss: 1.0645
+Accuracy: 0.6202
+Macro F1: 0.5851
+
+Classification Report (0=W, 1=N1, 2=N2, 3=N3, 4=R)
+              precision    recall  f1-score   support
+
+           0     0.9048    0.5962    0.7188      5964
+           1     0.2134    0.6175    0.3172      1532
+           2     0.8353    0.6105    0.7054      7910
+           3     0.7069    0.6225    0.6620      1833
+           4     0.4012    0.7477    0.5222      1716
+
+    accuracy                         0.6202     18955
+   macro avg     0.6123    0.6389    0.5851     18955
+weighted avg     0.7552    0.6202    0.6575     18955
+
+Confusion Matrix
+[[3556 1822  163   18  405]
+ [ 225  946  107    3  251]
+ [  70 1325 4829  447 1239]
+ [  65   26  581 1141   20]
+ [  14  313  101    5 1283]]
+PS C:\Users\kavin\Projects\sleep> $python_code = @"
+>> import torch
+>> import os
+>> import numpy as np
+>> 
+>> checkpoint_path = './checkpoints/cnn_sleep_stage_best.pt'
+>> data_dir = r'C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'
+>> 
+>> checkpoint = torch.load(checkpoint_path, weights_only=False)
+>> test_subjects = sorted(checkpoint['test_subjects'])
+>> 
+>> total_epochs = 0
+>> for sub in test_subjects:
+>>     file_path = os.path.join(data_dir, f'{sub}.npz')
+>>     if os.path.exists(file_path):
+>>         with np.load(file_path) as data:
+>>             total_epochs += len(data['y'])
+>> 
+>> print(f'Number of test subjects: {len(test_subjects)}')
+>> print(f'Sorted test subjects: {test_subjects}')
+>> print(f'Total test epochs: {total_epochs}')
+>> "@
+PS C:\Users\kavin\Projects\sleep> python -c "$python_code"
+Number of test subjects: 20
+Sorted test subjects: ['SN_1.npz', 'SN_11.npz', 'SN_13.npz', 'SN_19.npz', 'SN_23.npz', 'SN_31.npz', 'SN_32.npz', 'SN_34.npz', 'SN_40.npz', 'SN_45.npz', 'SN_46.npz', 'SN_5.npz', 'SN_54.npz', 'SN_71.npz', 'SN_74.npz', 'SN_77.npz', 'SN_78.npz', 'SN_81.npz', 'SN_84.npz', 'SN_91.npz']
+Total test epochs: 0
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp = torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts = sorted(cp['test_subjects']); d = r'C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; te = sum(len(np.load(os.path.join(d, f'{s}.npz'))['y']) for s in ts); print(f'Number of test subjects: {len(ts)}\nSorted test subjects: {ts}\nTotal test epochs: {te}')"
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<string>", line 1, in <genexpr>
+  File "C:\Users\kavin\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\lib\_npyio_impl.py", line 451, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects\\SN_1.npz.npz'
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp = torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts = sorted(cp['test_subjects']); d = r'C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; te = sum(len(np.load(os.path.join(d, f'{s if s.endswith(\".npz\") else s+\".npz\"}'))['y']) for s in ts); print(f'Number of test subjects: {len(ts)}\nSorted test subjects: {ts}\nTotal test epochs: {te}')"
+  File "<string>", line 1
+    \) else s+\.npz\}'))['y']) for s in ts); print(f'Number of test subjects: {len(ts)}\nSorted test subjects: {ts}\nTotal test epochs: {te}')
+                                                                                                                                             ^
+SyntaxError: unexpected character after line continuation character
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp = torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts = sorted(cp['test_subjects']); d = r'C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; te = sum(len(np.load(os.path.join(d, s + ('' if s.endswith('.npz') else '.npz')))['y']) for s in ts); print(f'Number of test subjects: {len(ts)}\nSorted test subjects: {ts}\nTotal test epochs: {te}')"
+Number of test subjects: 20
+Sorted test subjects: ['SN_1.npz', 'SN_11.npz', 'SN_13.npz', 'SN_19.npz', 'SN_23.npz', 'SN_31.npz', 'SN_32.npz', 'SN_34.npz', 'SN_40.npz', 'SN_45.npz', 'SN_46.npz', 'SN_5.npz', 'SN_54.npz', 'SN_71.npz', 'SN_74.npz', 'SN_77.npz', 'SN_78.npz', 'SN_81.npz', 'SN_84.npz', 'SN_91.npz']
+Total test epochs: 18955
+PS C:\Users\kavin\Projects\sleep> python -c "import torch; cp=torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts=sorted(cp['test_subjects']); print('\n'.join(ts))"
+SN_1.npz
+SN_11.npz
+SN_13.npz
+SN_19.npz
+SN_23.npz
+SN_31.npz
+SN_32.npz
+SN_34.npz
+SN_40.npz
+SN_45.npz
+SN_46.npz
+SN_5.npz
+SN_54.npz
+SN_71.npz
+SN_74.npz
+SN_77.npz
+SN_78.npz
+SN_81.npz
+SN_84.npz
+SN_91.npz
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp=torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts=sorted(cp['test_subjects']); data_dir='C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; total=0; [print(f'{s}: {len(np.load(os.path.join(data_dir, s))[\'y\'])}') or exec('total+=len(np.load(os.path.join(data_dir, s))[\'y\'])') for s in ts]; print(f'Total: {total}')"
+  File "<string>", line 1
+    import torch, os, numpy as np; cp=torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts=sorted(cp['test_subjects']); data_dir='C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; total=0; [print(f'{s}: {len(np.load(os.path.join(data_dir, s))[\'y\'])}') or exec('total+=len(np.load(os.path.join(data_dir, s))[\'y\'])') for s in ts]; print(f'Total: {total}')
+                                                                                                                                                                                                                                                                                                                       ^
+SyntaxError: f-string expression part cannot include a backslash
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp=torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts=sorted(cp['test_subjects']); data_dir='C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; total=0; [ (print(s + ': ' + str(len(y))), exec('total += len(y)')) for s in ts for y in [np.load(os.path.join(data_dir, s))['y']] ]; print('Total: ' + str(total))"
+SN_1.npz: 717
+SN_11.npz: 971
+SN_13.npz: 847
+SN_19.npz: 1017
+SN_23.npz: 944
+SN_31.npz: 1019
+SN_32.npz: 994
+SN_34.npz: 953
+SN_40.npz: 1007
+SN_45.npz: 1038
+SN_46.npz: 872
+SN_5.npz: 829
+SN_54.npz: 883
+SN_71.npz: 940
+SN_74.npz: 1023
+SN_77.npz: 889
+SN_78.npz: 1070
+SN_81.npz: 1022
+SN_84.npz: 1077
+SN_91.npz: 843
+Total: 0
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp=torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts=sorted(cp['test_subjects']); data_dir='C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; counts = []; [counts.append(len(np.load(os.path.join(data_dir, s))['y'])) for s in ts]; [print(ts[i] + ': ' + str(counts[i])) for i in range(len(ts))]; print('Total:', sum(counts))"
+SN_1.npz: 717
+SN_11.npz: 971
+SN_13.npz: 847
+SN_19.npz: 1017
+SN_23.npz: 944
+SN_31.npz: 1019
+SN_32.npz: 994
+SN_34.npz: 953
+SN_40.npz: 1007
+SN_45.npz: 1038
+SN_46.npz: 872
+SN_5.npz: 829
+SN_54.npz: 883
+SN_71.npz: 940
+SN_74.npz: 1023
+SN_77.npz: 889
+SN_78.npz: 1070
+SN_81.npz: 1022
+SN_84.npz: 1077
+SN_91.npz: 843
+Total: 18955
+PS C:\Users\kavin\Projects\sleep> python -c "import torch, os, numpy as np; cp=torch.load('./checkpoints/cnn_sleep_stage_best.pt', weights_only=False); ts=sorted(cp['test_subjects']); d='C:/Users/kavin/Music/Documents/DataSets/Sleep Project/processed_data/numpy_subjects'; total=0
+>> for s in ts:
+>>  c=len(np.load(os.path.join(d,s))['y']); total+=c; print(f'{s}: {c}')
+>> print('Total:', total)"
+SN_1.npz: 717
+SN_11.npz: 971
+SN_13.npz: 847
+SN_19.npz: 1017
+SN_23.npz: 944
+SN_31.npz: 1019
+SN_32.npz: 994
+SN_34.npz: 953
+SN_40.npz: 1007
+SN_45.npz: 1038
+SN_46.npz: 872
+SN_5.npz: 829
+SN_54.npz: 883
+SN_71.npz: 940
+SN_74.npz: 1023
+SN_77.npz: 889
+SN_78.npz: 1070
+SN_81.npz: 1022
+SN_84.npz: 1077
+SN_91.npz: 843
+Total: 18955
+PS C:\Users\kavin\Projects\sleep> ^C
+PS C:\Users\kavin\Projects\sleep> ^C
+PS C:\Users\kavin\Projects\sleep> ^C
+PS C:\Users\kavin\Projects\sleep> 
+
+
+Latest test result:
+
+Accuracy: 0.6202
+Macro F1: 0.5851
+Test Loss: 1.0645
